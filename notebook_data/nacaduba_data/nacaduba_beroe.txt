@@ -1,0 +1,34 @@
+Species: nacaduba beroe
+Query: nacaduba beroe - share the underside ID keys, including tail info
+Date: 2026-06-17
+============================================================
+
+Nacaduba beroe neon (The Opaque Six-line Blue) is a member of the berenice group (the 6-line Blues) of the genus Nacaduba.
+
+Underside Identification Keys
+
+Group Characteristic: The underside of the forewing possesses a pair of pale subbasal lines across the cell.
+
+Primary Diagnostic Feature: It is characterized by having the area between the postdiscal striae unicolorous and of the ground color.
+
+Distinguishing Feature (Male): The wing bases on the underside are darkened, which helps distinguish it from the similar N. kurava. Additionally, the underside markings are not visible by transparency on the upperside.
+
+Distinguishing Feature (Female): The upperside of the female features a lustrous purple patch on the forewing.
+
+General Pattern: The markings are formed by pairs of short, dull whitish striae arranged in the usual Lycaenine pattern.
+
+Size Comparison: It is generally larger than N. berenice.
+
+Wing Length and Size
+
+Forewing Length: Typically ranges between 12.0 mm and 15.0 mm.
+
+Tail Information
+
+Tail: This species possesses a filamentous tail at vein 2 of the hindwing.
+
+---
+
+Visual Reference
+
+Plate 82, Figure 11: Nacaduba beroe neon{:target="_blank"}

@@ -1,0 +1,33 @@
+Species: nacaduba kirtoni
+Query: nacaduba kirtoni - share the underside ID keys, including tail info
+Date: 2026-06-17
+============================================================
+
+Nacaduba kirtoni is a member of the berenice group (the 6-line Blues) and is known only from high elevations above 1200 m.
+
+Underside Identification Keys
+
+Group Characteristic: As a member of the 6-line Blues, the underside of the forewing possesses a pair of pale subbasal lines across the cell.
+
+Primary Diagnostic Feature: The underside is nearly identical to that of Nacaduba berenice, making it extremely difficult to separate them without examination of the male genitalia.
+
+Ground Color: Typically a buff-grey.
+
+Pattern: The markings consist of pairs of whitish striae arranged in the usual Lycaenine pattern, with marginal markings of the same color.
+
+Tornal Markings: On the hindwing underside, space 2 features a black marginal spot dusted with metallic green scales and crowned by a pale orange halo.
+
+Distinguishing Features:
+Unlike Nacaduba beroe, the wing bases on the underside are not darkened.
+
+The underside markings are barely visible by transparency on the upperside of the male.
+
+Tail Information
+
+Tail: This species possesses a filamentous tail at vein 2 of the hindwing.
+
+---
+
+Visual Reference
+
+Plate 82, Figure 6: Nacaduba kirtoni (Holotype){:target="_blank"}

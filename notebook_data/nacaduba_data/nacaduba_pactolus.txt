@@ -1,0 +1,32 @@
+Species: nacaduba pactolus
+Query: nacaduba pactolus - share the underside ID keys, including tail info
+Date: 2026-06-17
+============================================================
+
+Nacaduba pactolus odon (The Large 4-line Blue) is a member of the pavana group (the 4-line Blues) within the genus Nacaduba.
+
+Underside Identification Keys
+
+Group Characteristic: The underside of the forewing lacks a pair of pale subbasal lines in the cell.
+
+Pattern Style: The markings on the underside are formed by pairs of short, dull whitish striae. 
+
+Primary Diagnostic Feature: It is characterized by having underside stripes (striae) that are broader and more diffuse than in any other species within the genus, with the exception of the much rarer N. angusta.
+
+Ground Color: The area between the postdiscal striae is unicolorous and of the ground color, which is typically a buff-grey.
+
+Striae Color: The striae themselves are notably diffuse and yellowish.
+
+Wing Length and Size
+
+Forewing Length: The forewing typically measures between 14.5 mm and 16.0 mm.
+
+Tail Information
+
+Tail: This species possesses a filamentous tail at vein 2 of the hindwing.
+
+---
+
+Visual Reference
+
+Plate 82, Figure 2: Nacaduba pactolus odon{:target="_blank"}

@@ -1,0 +1,37 @@
+Species: nacaduba subperusia
+Query: nacaduba subperusia - share the underside ID keys, including tail info
+Date: 2026-06-17
+============================================================
+
+Nacaduba subperusia belongs to the pavana group (the 4-line Blues) of the genus Nacaduba. It occurs in Malaysia as two subspecies: lysa (lowlands) and intricata (highlands).
+
+Underside Identification Keys
+
+Group Characteristic: The underside of the forewing lacks a pair of pale subbasal lines in the cell.
+
+Striae Arrangement: On the hindwing underside, the inner submarginal and outer postdiscal striae in spaces 4 and 5 are nearly touching.
+
+Tornal Markings: The black tornal spot in space 2 on the hindwing underside is crowned by a clear orange ring. This helps distinguish it from the very similar N. hermus, which has a brownish-orange ring.
+
+Ground Color and Striae: The markings consist of pairs of short striae.
+In subspecies lysa, the striae are whitish.
+
+In subspecies intricata, the striae are pale buff.
+
+Subspecies Variation
+
+Nacaduba subperusia lysa: Found at low to moderate elevations. It is generally smaller, with a forewing length of 13.0 mm to 15.0 mm.
+
+Nacaduba subperusia intricata: Found at high elevations (above 1100 m). It is larger (15.0 mm to 16.0 mm) and duller, with the veins on the upperside appearing darker and more contrasting.
+
+Tail Information
+
+Tail: This species possesses a filamentous tail at vein 2 of the hindwing.
+
+---
+
+Visual References
+
+Plate 82, Figure 8a: Nacaduba subperusia lysa{:target="_blank"}
+
+Plate 82, Figure 8b: Nacaduba subperusia intricata{:target="_blank"}
