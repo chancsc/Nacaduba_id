@@ -672,7 +672,6 @@ function showSpeciesDetailInline(sp) {
     ${sp.common_name ? `<p class="species-name">${escapeHtml(sp.name)}</p>` : ''}
     ${noteHTML}
     ${buildPathDisplay(sp.paths, sp.note, sp.resultFeatures, sp.name)}
-    ${buildPhotoGallery(sp)}
     <a class="btn-inat" href="${escapeAttr(sp.inat_url)}" target="_blank" rel="noopener noreferrer">
       ${iconExternal()} View on iNaturalist
     </a>
