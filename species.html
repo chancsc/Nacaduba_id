@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse and search all Nacaduba species covered by the Malaysian Six-line Blue identification key.">
+  <meta name="theme-color" content="#2d5a27">
+  <title>Nacaduba ID — Species Search</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="loading" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <span>Loading species data…</span>
+  </div>
+
+  <div id="species-app" style="display:none;">
+
+    <!-- Sticky topbar -->
+    <div class="app-topbar">
+      <button class="menu-btn app-topbar-menu-btn" id="menu-btn" aria-label="Open menu">&#9776;</button>
+      <span class="app-topbar-title">Species Search</span>
+    </div>
+
+    <!-- Search UI (full page, not in a panel) -->
+    <div class="sp-page">
+      <div class="search-box">
+        <input id="search-input" type="search" placeholder="Search by name…"
+               autocomplete="off" spellcheck="false" aria-label="Search species">
+        <p id="search-count" class="search-count"></p>
+      </div>
+      <button id="back-to-results" class="sp-back-btn" style="display:none" aria-label="Back to search results">← Back to results</button>
+      <div id="search-results" class="search-results" role="list"></div>
+      <div id="species-detail" class="species-detail" style="display:none;"></div>
+    </div>
+
+  </div>
+
+  <!-- Hamburger menu overlay -->
+  <div id="menu-overlay" class="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="menu-panel">
+
+      <div class="menu-header">
+        <h2 class="menu-title">Nacaduba ID</h2>
+        <button id="menu-close" class="menu-close" aria-label="Close menu">✕</button>
+      </div>
+
+      <nav class="menu-nav" aria-label="Navigation">
+        <a href="index.html" class="menu-nav-item" id="nav-home" aria-label="Home — where to start">
+          <span class="menu-nav-item-label">Home</span>
+          <span class="menu-nav-item-desc">Where to start</span>
+        </a>
+        <a href="checklist.html" class="menu-nav-item" id="nav-scoring" aria-label="Feature Scoring — score multiple features at once">
+          <span class="menu-nav-item-label">Feature Scoring</span>
+          <span class="menu-nav-item-desc">Score multiple features at once</span>
+        </a>
+        <button class="menu-nav-item active" id="nav-species" aria-label="Species Search — browse all covered taxa">
+          <span class="menu-nav-item-label">Species Search</span>
+          <span class="menu-nav-item-desc">Browse all covered taxa</span>
+        </button>
+        <a href="guide.html" class="menu-nav-item" id="nav-guide" aria-label="Visual Guide — wing diagrams and terminology">
+          <span class="menu-nav-item-label">Visual Guide</span>
+          <span class="menu-nav-item-desc">Wing diagrams &amp; terminology</span>
+        </a>
+        <a href="about.html" class="menu-nav-item" id="nav-about" aria-label="About — how to use this app">
+          <span class="menu-nav-item-label">About</span>
+          <span class="menu-nav-item-desc">How to use this app</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <noscript>
+    <div style="padding:2rem;text-align:center;font-family:sans-serif;">
+      <p>This tool requires JavaScript to run.<br>
+      Please enable JavaScript in your browser and reload the page.</p>
+    </div>
+  </noscript>
+
+  <script src="js/path-utils.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

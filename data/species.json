@@ -1,0 +1,142 @@
+{
+  "generated": "2026-06-17",
+  "place": "Malaysia",
+  "place_id": 7155,
+  "species": [
+    {
+      "id": 498161,
+      "name": "Nacaduba angusta",
+      "common_name": "White Four-line Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/498161",
+      "taxon_photos": [],
+      "observation_count": 89,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_angusta"
+    },
+    {
+      "id": 473919,
+      "name": "Nacaduba berenice",
+      "common_name": "Rounded Sixline Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/473919",
+      "taxon_photos": [],
+      "observation_count": 135,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_berenice"
+    },
+    {
+      "id": 196827,
+      "name": "Nacaduba beroe",
+      "common_name": "Opaque Sixline Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/196827",
+      "taxon_photos": [],
+      "observation_count": 115,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_beroe"
+    },
+    {
+      "id": 353667,
+      "name": "Nacaduba biocellata",
+      "common_name": "Double-spotted Line Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/353667",
+      "taxon_photos": [],
+      "observation_count": 8,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_biocellata"
+    },
+    {
+      "id": 498175,
+      "name": "Nacaduba calauria",
+      "common_name": "Dark Malayan Sixline Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/498175",
+      "taxon_photos": [],
+      "observation_count": 24,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_calauria"
+    },
+    {
+      "id": 841606,
+      "name": "Nacaduba hermus",
+      "common_name": "Pale Four-line Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/841606",
+      "taxon_photos": [],
+      "observation_count": 58,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_hermus"
+    },
+    {
+      "id": 179385,
+      "name": "Nacaduba kurava",
+      "common_name": "Transparent 6-line Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/179385",
+      "taxon_photos": [],
+      "observation_count": 141,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_kurava"
+    },
+    {
+      "id": 888721,
+      "name": "Nacaduba normani",
+      "common_name": "",
+      "inat_url": "https://www.inaturalist.org/taxa/888721",
+      "taxon_photos": [],
+      "observation_count": 43,
+      "wikipedia_url": null
+    },
+    {
+      "id": 320251,
+      "name": "Nacaduba pactolus",
+      "common_name": "Large Fourline Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/320251",
+      "taxon_photos": [],
+      "observation_count": 48,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_pactolus"
+    },
+    {
+      "id": 498171,
+      "name": "Nacaduba pavana",
+      "common_name": "Small Fourline Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/498171",
+      "taxon_photos": [],
+      "observation_count": 8,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_pavana"
+    },
+    {
+      "id": 1392198,
+      "name": "Nacaduba pendleburyi",
+      "common_name": "",
+      "inat_url": "https://www.inaturalist.org/taxa/1392198",
+      "taxon_photos": [],
+      "observation_count": 11,
+      "wikipedia_url": null
+    },
+    {
+      "id": 1242702,
+      "name": "Nacaduba russelli",
+      "common_name": "Dark Submarginal Sixline Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/1242702",
+      "taxon_photos": [],
+      "observation_count": 2,
+      "wikipedia_url": null
+    },
+    {
+      "id": 149567,
+      "name": "Nacaduba sanaya",
+      "common_name": "Jewel Fourline Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/149567",
+      "taxon_photos": [],
+      "observation_count": 60,
+      "wikipedia_url": null
+    },
+    {
+      "id": 1569161,
+      "name": "Nacaduba solta",
+      "common_name": "",
+      "inat_url": "https://www.inaturalist.org/taxa/1569161",
+      "taxon_photos": [],
+      "observation_count": 5,
+      "wikipedia_url": null
+    },
+    {
+      "id": 841608,
+      "name": "Nacaduba subperusia",
+      "common_name": "Violet Fourline Blue",
+      "inat_url": "https://www.inaturalist.org/taxa/841608",
+      "taxon_photos": [],
+      "observation_count": 20,
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Nacaduba_subperusia"
+    }
+  ]
+}

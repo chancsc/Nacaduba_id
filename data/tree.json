@@ -1,0 +1,11 @@
+{
+  "start": "q_placeholder",
+  "nodes": {
+    "q_placeholder": {
+      "type": "question",
+      "id": "q_placeholder",
+      "question": "Placeholder — Nacaduba identification tree not yet built.",
+      "choices": []
+    }
+  }
+}

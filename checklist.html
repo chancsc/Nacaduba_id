@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Score multiple observable features at once to rank Nacaduba candidates from a field photo.">
+  <meta name="theme-color" content="#2d5a27">
+  <title>Nacaduba ID — Feature Scoring</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Checklist page layout ── */
+    .cl-topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: var(--primary);
+      color: #fff;
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.55rem 1rem;
+      margin: -1rem -1rem 0;
+    }
+    .cl-back {
+      color: rgba(255,255,255,0.88); text-decoration: none;
+      font-size: 0.82rem; flex-shrink: 0;
+      display: flex; align-items: center; gap: 0.2rem;
+    }
+    .cl-back:hover { color: #fff; }
+    .cl-title {
+      font-size: 0.92rem; font-weight: 600; flex: 1;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .cl-answered { font-size: 0.75rem; color: rgba(255,255,255,0.7); flex-shrink: 0; }
+    .cl-reset-btn {
+      background: none; border: 1px solid rgba(255,255,255,0.45);
+      color: #fff; border-radius: 5px;
+      padding: 0.22rem 0.55rem; font-size: 0.78rem;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .cl-reset-btn:hover { background: rgba(255,255,255,0.15); }
+
+    .cl-page { max-width: 680px; margin: 0 auto; }
+
+    .cl-intro {
+      font-size: 0.82rem; color: var(--text-muted);
+      margin: 0.9rem 0 0.75rem; line-height: 1.5;
+    }
+
+    /* ── Candidates panel ── */
+    .cl-panel {
+      background: var(--card); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .cl-panel-header {
+      background: var(--primary); color: #fff;
+      font-size: 0.73rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+    }
+    .cl-empty {
+      padding: 1.25rem 0.85rem; font-size: 0.85rem; color: var(--text-muted);
+    }
+
+    /* Candidate rows */
+    .cl-cand { border-bottom: 1px solid #f0ece4; }
+    .cl-cand:last-child { border-bottom: none; }
+    .cl-cand.expanded { background: #faf7f2; }
+    .cl-cand-row {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.45rem 0.85rem; cursor: pointer;
+      transition: background var(--transition);
+    }
+    .cl-cand-row:hover { background: #f5f1ea; }
+    .cl-cand.expanded .cl-cand-row { background: #f0ece4; }
+    .cl-rank { font-size: 0.85rem; width: 1.6rem; flex-shrink: 0; text-align: center; }
+    .cl-cname { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .cl-sci { font-style: italic; font-size: 0.87rem; color: var(--text); }
+    .cl-common { font-size: 0.72rem; color: var(--text-muted); }
+    .cl-bar-wrap { display: flex; align-items: center; gap: 0.35rem; flex-shrink: 0; }
+    .cl-bar-bg { width: 64px; height: 6px; background: #e8e0d0; border-radius: 3px; }
+    .cl-bar {
+      height: 6px; border-radius: 3px;
+      background: var(--primary); transition: width 0.3s ease;
+      min-width: 0;
+    }
+    .cl-bar.neg { background: #c0392b; }
+    .cl-score-num { font-size: 0.72rem; color: var(--text-muted); width: 2.2rem; text-align: right; }
+    .cl-score-num.neg { color: #c0392b; }
+
+    /* Expanded candidate detail */
+    .cl-cand-detail {
+      padding: 0.6rem 0.85rem 0.85rem 2.95rem;
+      border-top: 1px solid #e8e0d0;
+    }
+    .cl-note {
+      font-size: 0.78rem; color: var(--text); line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+    .cl-inat-link {
+      font-size: 0.78rem; color: var(--primary); text-decoration: none;
+      font-weight: 500;
+    }
+    .cl-inat-link:hover { text-decoration: underline; }
+
+    /* ── Questions section ── */
+    .cl-section-label {
+      font-size: 0.72rem; font-weight: 700; color: var(--primary);
+      letter-spacing: 0.07em; text-transform: uppercase;
+      margin: 1.25rem 0 0.6rem;
+    }
+    .cl-q {
+      background: var(--card); border-radius: var(--radius);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+      margin-bottom: 0.7rem; overflow: hidden;
+      border-left: 3px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .cl-q.answered {
+      border-left-color: var(--primary);
+      box-shadow: 0 1px 5px rgba(45,90,39,0.15);
+    }
+    .cl-qnum {
+      display: inline-block;
+      font-size: 0.62rem; font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--primary); background: var(--border);
+      border-radius: 3px; padding: 0.05em 0.3em;
+      margin-right: 0.2em; vertical-align: 0.05em;
+      letter-spacing: 0;
+    }
+    .cl-qtext {
+      padding: 0.65rem 0.85rem 0.35rem;
+      font-size: 0.87rem; font-weight: 600; color: var(--text); line-height: 1.4;
+    }
+    .cl-hint {
+      margin: 0 0.85rem 0.35rem;
+      font-size: 0.75rem;
+    }
+    .cl-hint summary {
+      cursor: pointer; color: var(--text-muted); font-style: italic;
+      list-style: none; padding: 0.1rem 0;
+    }
+    .cl-hint summary::-webkit-details-marker { display: none; }
+    .cl-hint summary::before { content: '+ '; }
+    details[open].cl-hint summary::before { content: '− '; }
+    .cl-hint p {
+      color: var(--text-muted); line-height: 1.5; margin-top: 0.3rem;
+    }
+    .cl-choices {
+      display: flex; flex-wrap: wrap; gap: 0.35rem;
+      padding: 0.1rem 0.85rem 0.75rem;
+    }
+    .cl-cbtn {
+      border: 1.5px solid var(--border); background: var(--card);
+      border-radius: 7px; padding: 0.28rem 0.55rem;
+      font-size: 0.78rem; cursor: pointer; line-height: 1.35;
+      text-align: left; transition: background var(--transition), border-color var(--transition);
+    }
+    .cl-cbtn:hover { background: #f0ece4; border-color: var(--primary); }
+    .cl-cbtn.sel {
+      background: var(--primary); border-color: var(--primary);
+      color: #fff;
+    }
+    .cl-cbtn.cd {
+      border-style: dashed;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .cl-cbtn.cd.sel {
+      background: #e8e0d0; border-color: var(--accent);
+      color: var(--accent); border-style: dashed;
+    }
+
+    /* iNat link icon on candidate rows */
+    .cl-inat-icon {
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      line-height: 1;
+      text-decoration: none;
+      opacity: 0.55;
+      padding: 0.15rem 0.1rem;
+      border-radius: 3px;
+      transition: opacity 0.15s;
+    }
+    .cl-inat-icon:hover { opacity: 1; }
+
+    /* Show more / fewer */
+    .cl-more {
+      display: block; width: 100%; background: none; border: none;
+      font-size: 0.82rem; color: var(--primary); cursor: pointer;
+      padding: 0.6rem 0; text-align: center;
+      border-radius: var(--radius);
+    }
+    .cl-more:hover { background: rgba(45,90,39,0.07); }
+
+    /* Detail placeholder (hidden — used for non-visible state) */
+    #cl-detail { display: none; }
+
+    /* Hamburger button on dark topbar */
+    .cl-menu-btn {
+      color: rgba(255,255,255,0.88);
+      flex-shrink: 0;
+      font-size: 1.2rem;
+      line-height: 1;
+      padding: 0.2rem 0.3rem;
+    }
+    .cl-menu-btn:hover { background: rgba(255,255,255,0.15) !important; color: #fff; }
+
+    @media (min-width: 640px) {
+      .cl-qtext { font-size: 0.9rem; }
+      .cl-cbtn { font-size: 0.8rem; }
+    }
+    .guide-link {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 2px;
+    }
+    .guide-link:hover { color: var(--primary); text-decoration-style: solid; }
+  </style>
+</head>
+<body>
+
+  <div id="loading" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <span>Loading feature data…</span>
+  </div>
+
+  <div id="cl-app" style="display:none;">
+    <div class="cl-topbar">
+      <button class="menu-btn cl-menu-btn" id="cl-menu-btn" aria-label="Open menu">&#9776;</button>
+      <span class="cl-title">Feature Scoring</span>
+      <span class="cl-answered" id="cl-answered-count"></span>
+      <button id="cl-reset" class="cl-reset-btn">Reset</button>
+    </div>
+
+    <div class="cl-page">
+      <p class="cl-intro">
+        Mark only the features visible in your photo — leave everything else blank.
+        Species are scored and ranked in real time; unanswered features do not penalise any candidate.
+        Tap a ranked candidate to see its identification note.
+      </p>
+
+      <div class="cl-section-label">Observable features</div>
+      <div id="cl-questions"></div>
+
+      <div class="cl-section-label" id="cl-candidates-label" style="margin-top:1.5rem;">Candidates</div>
+      <div class="cl-panel">
+        <div id="cl-candidates">
+          <p class="cl-empty">Answer questions above to rank candidates.</p>
+        </div>
+      </div>
+      <div id="cl-detail"></div>
+    </div>
+  </div>
+
+  <noscript>
+    <div style="padding:2rem;text-align:center;font-family:sans-serif;">
+      <p>This tool requires JavaScript. Please enable it and reload.</p>
+    </div>
+  </noscript>
+
+  <script src="js/path-utils.js"></script>
+  <script src="js/checklist.js"></script>
+
+  <!-- Menu overlay for checklist page — nav only, no content panes -->
+  <div id="cl-menu-overlay" class="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="menu-panel">
+
+      <div class="menu-header">
+        <button id="cl-back-placeholder" class="back-to-search" style="display:none" aria-label="Back to search results">
+          ← Results
+        </button>
+        <h2 class="menu-title">Nacaduba ID</h2>
+        <button id="cl-menu-close" class="menu-close" aria-label="Close menu">✕</button>
+      </div>
+
+      <nav class="menu-nav" aria-label="Navigation">
+        <a href="index.html" class="menu-nav-item" id="cl-nav-home" aria-label="Home — where to start">
+          <span class="menu-nav-item-label">Home</span>
+          <span class="menu-nav-item-desc">Where to start</span>
+        </a>
+        <button class="menu-nav-item active" id="cl-nav-scoring" aria-label="Feature Scoring — score multiple features at once">
+          <span class="menu-nav-item-label">Feature Scoring</span>
+          <span class="menu-nav-item-desc">Score multiple features at once</span>
+        </button>
+        <a href="species.html" class="menu-nav-item" id="cl-nav-species" aria-label="Species Search — browse all covered taxa">
+          <span class="menu-nav-item-label">Species Search</span>
+          <span class="menu-nav-item-desc">Browse all covered taxa</span>
+        </a>
+        <a href="guide.html" class="menu-nav-item" id="cl-nav-guide" aria-label="Visual Guide — wing diagrams and terminology">
+          <span class="menu-nav-item-label">Visual Guide</span>
+          <span class="menu-nav-item-desc">Wing diagrams &amp; terminology</span>
+        </a>
+        <a href="about.html" class="menu-nav-item" id="cl-nav-about" aria-label="About — how to use this app">
+          <span class="menu-nav-item-label">About</span>
+          <span class="menu-nav-item-desc">How to use this app</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const overlay  = document.getElementById('cl-menu-overlay');
+      const openBtn  = document.getElementById('cl-menu-btn');
+      const closeBtn = document.getElementById('cl-menu-close');
+      const scoringBtn = document.getElementById('cl-nav-scoring');
+
+      function openClMenu() {
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeClMenu() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      openBtn.addEventListener('click', openClMenu);
+      closeBtn.addEventListener('click', closeClMenu);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) closeClMenu(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) closeClMenu();
+      });
+      scoringBtn.addEventListener('click', closeClMenu);
+    })();
+  </script>
+</body>
+</html>

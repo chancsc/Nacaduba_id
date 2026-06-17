@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Nacaduba ID — interactive identification key for Peninsular Malaysian Six-line Blue butterflies.">
+  <meta name="theme-color" content="#2d5a27">
+  <title>Nacaduba ID — About</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-topbar">
+    <button class="menu-btn app-topbar-menu-btn" id="menu-btn" aria-label="Open menu">&#9776;</button>
+    <span class="app-topbar-title">About</span>
+  </div>
+
+  <div class="about-content" style="max-width:680px;margin:0 auto;padding:1rem 1rem 3rem;">
+
+    <div class="about-hero">
+      <div class="about-hero-icon" aria-hidden="true">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+          <ellipse cx="14" cy="20" rx="11" ry="8" fill="#d4e2d0" opacity="0.9"/>
+          <ellipse cx="38" cy="20" rx="11" ry="8" fill="#d4e2d0" opacity="0.9"/>
+          <ellipse cx="15" cy="34" rx="8" ry="7" fill="#d4e2d0" opacity="0.65"/>
+          <ellipse cx="37" cy="34" rx="8" ry="7" fill="#d4e2d0" opacity="0.65"/>
+          <line x1="26" y1="13" x2="26" y2="42" stroke="#2d5a27" stroke-width="2" stroke-linecap="round"/>
+          <path d="M23 14 Q26 11 29 14" stroke="#2d5a27" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <h3 class="about-app-name">Nacaduba ID</h3>
+      <p class="about-tagline">Interactive identification key for Peninsular Malaysian Six-line Blue butterflies</p>
+    </div>
+
+    <section class="about-section">
+      <h4 class="about-section-title">What is this app?</h4>
+      <p>This tool walks you through a step-by-step morphological key to identify species in the genus <em>Nacaduba</em> — the Six-line Blues — recorded from Peninsular Malaysia. Answer the questions about the butterfly in front of you; the key will narrow down to a species or group.</p>
+    </section>
+
+    <section class="about-section">
+      <h4 class="about-section-title">How to use it</h4>
+      <ol class="about-steps">
+        <li>Start from the first question card and select the best matching character.</li>
+        <li>Use the <strong>Back</strong> button to correct a previous choice.</li>
+        <li>If you cannot observe the required character, select <strong>Cannot determine</strong> — the key will route you to the best available result.</li>
+        <li>A result card may identify a single species or flag an unresolved pair requiring additional observation (e.g. upperside colour or genitalia).</li>
+        <li>Tap <strong>Start Over</strong> at any time to reset.</li>
+      </ol>
+    </section>
+
+    <section class="about-section">
+      <h4 class="about-section-title">Feature scoring mode</h4>
+      <p>If multiple features are visible in your photo but you want to skip the step-by-step flow, try <a class="about-link" href="checklist.html">Feature Scoring</a>. Mark only the characters you can observe; all species are scored and ranked in real time. Unanswered features never penalise a candidate.</p>
+    </section>
+
+    <section class="about-section">
+      <h4 class="about-section-title">Coverage</h4>
+      <p><strong>Scope: Peninsular Malaysia only.</strong> The key is based on identification literature covering <em>Nacaduba</em> species recorded from the Malay Peninsula. Bornean endemic species are not covered. Characters used are primarily from the underside wing pattern and morphology, supplemented by geography where Peninsula and Bornean species overlap.</p>
+      <p class="about-note">⚠ Some species pairs cannot be reliably distinguished without observing the male upperside or performing genitalia dissection; the key will flag these cases explicitly.</p>
+    </section>
+
+    <section class="about-section">
+      <h4 class="about-section-title">Species search</h4>
+      <p>Use <a class="about-link" href="species.html">Species Search</a> to browse or search all taxa covered by this key. Each species page shows identification characters, photos (from iNaturalist), and the complete decision path that leads to it.</p>
+    </section>
+
+    <section class="about-section">
+      <h4 class="about-section-title">Data &amp; sources</h4>
+      <p>The identification key is based on published morphological literature for Malaysian <em>Nacaduba</em>. Species occurrence data and photographs are sourced from <a class="about-link" href="https://www.inaturalist.org/taxa/47224" target="_blank" rel="noopener noreferrer">iNaturalist</a> (CC-licensed).</p>
+    </section>
+
+    <section class="about-section">
+      <h4 class="about-section-title">Feedback</h4>
+      <p>Found an error or missing species? Please <a class="about-link" href="https://github.com/chancsc/Nacaduba_id/issues" target="_blank" rel="noopener noreferrer">open an issue on GitHub</a>.</p>
+    </section>
+
+  </div>
+
+  <!-- Hamburger menu overlay -->
+  <div id="menu-overlay" class="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="menu-panel">
+      <div class="menu-header">
+        <h2 class="menu-title">Nacaduba ID</h2>
+        <button id="menu-close" class="menu-close" aria-label="Close menu">✕</button>
+      </div>
+      <nav class="menu-nav" aria-label="Navigation">
+        <a href="index.html" class="menu-nav-item" id="nav-home" aria-label="Home — where to start">
+          <span class="menu-nav-item-label">Home</span>
+          <span class="menu-nav-item-desc">Where to start</span>
+        </a>
+        <a href="checklist.html" class="menu-nav-item" id="nav-scoring" aria-label="Feature Scoring — score multiple features at once">
+          <span class="menu-nav-item-label">Feature Scoring</span>
+          <span class="menu-nav-item-desc">Score multiple features at once</span>
+        </a>
+        <a href="species.html" class="menu-nav-item" id="nav-species" aria-label="Species Search — browse all covered taxa">
+          <span class="menu-nav-item-label">Species Search</span>
+          <span class="menu-nav-item-desc">Browse all covered taxa</span>
+        </a>
+        <a href="guide.html" class="menu-nav-item" id="nav-guide" aria-label="Visual Guide — wing diagrams and terminology">
+          <span class="menu-nav-item-label">Visual Guide</span>
+          <span class="menu-nav-item-desc">Wing diagrams &amp; terminology</span>
+        </a>
+        <button class="menu-nav-item active" id="nav-about" aria-label="About — how to use this app">
+          <span class="menu-nav-item-label">About</span>
+          <span class="menu-nav-item-desc">How to use this app</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const overlay  = document.getElementById('menu-overlay');
+      const openBtn  = document.getElementById('menu-btn');
+      const closeBtn = document.getElementById('menu-close');
+      const aboutBtn = document.getElementById('nav-about');
+      function open()  { overlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+      function close() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+      openBtn.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      if (aboutBtn) aboutBtn.addEventListener('click', close);
+      overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
+    })();
+  </script>
+
+</body>
+</html>

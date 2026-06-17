@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "regen": "node scripts/compute_sim_cd_paths.js",
+    "validate": "node scripts/validate_sim_cd_paths.js",
+    "regen-validate": "node scripts/compute_sim_cd_paths.js && node scripts/validate_sim_cd_paths.js"
+  }
+}

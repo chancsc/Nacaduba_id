@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Visual reference guide — wing venation, space numbering, and identification terms for Nacaduba Six-line Blue butterflies.">
+  <meta name="theme-color" content="#2d5a27">
+  <title>Nacaduba ID — Visual Guide</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .guide-content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 1rem 1rem 3rem;
+    }
+
+    .guide-intro {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0.75rem 0 1.5rem;
+    }
+
+    /* Section */
+    .guide-section {
+      margin-bottom: 2rem;
+    }
+
+    .guide-section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 0.5rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .guide-section-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0 0 0.85rem;
+    }
+
+    .guide-section-list {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0 0 0.85rem;
+      padding-left: 1.25rem;
+    }
+    .guide-section-list li { margin-bottom: 0.4rem; }
+
+    /* Image card */
+    .guide-img-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .guide-img-wrap {
+      background: #f8f6f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.25rem;
+    }
+
+    .guide-img-wrap img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .guide-img-caption {
+      padding: 0.7rem 1rem 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .guide-img-caption strong {
+      display: block;
+      font-size: 0.84rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .guide-img-caption p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Term list */
+    .guide-terms {
+      margin: 0.85rem 0 0;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0.3rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .guide-term-key {
+      font-weight: 600;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .guide-term-val {
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    @media (min-width: 480px) {
+      .guide-img-wrap { padding: 1.5rem 2rem; }
+    }
+
+    /* ── Start Here card ── */
+    .start-here {
+      background: #f0f5ee;
+      border: 1.5px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .start-here-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 0 0 0.5rem;
+    }
+    .start-here-lead {
+      font-size: 0.83rem;
+      color: var(--text);
+      line-height: 1.55;
+      margin: 0 0 0.9rem;
+    }
+    .start-here-sub {
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0.85rem 0 0.35rem;
+    }
+    .start-here-terms {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0.35rem 0.7rem;
+      font-size: 0.8rem;
+    }
+    .start-here-term {
+      font-weight: 600;
+      color: var(--primary);
+      white-space: nowrap;
+      align-self: start;
+    }
+    .start-here-def {
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .start-here-def a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 2px;
+      white-space: nowrap;
+    }
+    .start-here-def a:hover { text-decoration-style: solid; }
+    .start-here-photo {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0.85rem 0 0;
+      padding-top: 0.75rem;
+      border-top: 1px solid #c8ddc4;
+    }
+    .start-here-cta {
+      display: inline-block;
+      margin-top: 0.85rem;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.38rem 0.85rem;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    .start-here-cta:hover { background: #234820; }
+  </style>
+</head>
+<body>
+
+  <div class="app-topbar">
+    <button class="menu-btn app-topbar-menu-btn" id="menu-btn" aria-label="Open menu">&#9776;</button>
+    <span class="app-topbar-title">Visual Guide</span>
+  </div>
+
+  <div class="guide-content">
+
+    <!-- ── Start Here ── -->
+    <div class="start-here" id="start-here">
+      <p class="start-here-title">Where to start</p>
+      <p class="start-here-lead">
+        Open <a href="checklist.html" style="color:var(--primary);font-weight:600;">Feature Scoring</a>
+        with your photo. Mark only the features you can clearly see — candidates are ranked in real time.
+        Leave anything unclear blank; unanswered questions do not penalise any candidate.
+      </p>
+
+      <p class="start-here-sub">Know these five terms before you score</p>
+      <div class="start-here-terms">
+
+        <span class="start-here-term">Wing spaces</span>
+        <span class="start-here-def">
+          Each area between two adjacent veins is a numbered <em>space</em>.
+          Spots are named by the space they sit in.
+          <a href="#wing-spaces">Wing space diagram ↓</a>
+        </span>
+
+        <span class="start-here-term">HW spots 5, 6, 7</span>
+        <span class="start-here-def">
+          The row of hindwing postdiscal spots counted outward from the tornal (inner) margin.
+          Their alignment — especially spot 6 — is the single most-used diagnostic character.
+          <a href="#hw-tail-spots-fw-spaces">HW spots diagram ↓</a>
+        </span>
+
+        <span class="start-here-term">End-cell bar</span>
+        <span class="start-here-def">
+          The bar that closes the hindwing discal cell at its outer end.
+          Where spot 6 sits relative to this bar (nearer to spot 5, or nearer to the bar) is asked repeatedly.
+          <a href="#spot6-end-cell-bar">Spot 6 &amp; end-cell bar ↓</a>
+        </span>
+
+        <span class="start-here-term">FW spot 4</span>
+        <span class="start-here-def">
+          Forewing postdiscal spot in space 4. In some groups it is shifted outward
+          (distad) relative to spots 5 and 6, breaking the straight postdiscal row.
+          <a href="#fw-spots">FW spots diagram ↓</a> ·
+          <a href="#fw-spot4-distad">Spot 4 shifted distad ↓</a>
+        </span>
+
+        <span class="start-here-term">FW space 11</span>
+        <span class="start-here-def">
+          A narrow costal space near the forewing apex. Presence of a central spot there
+          is a useful character in several subgroups.
+          <a href="#fw-space-11">FW space 11 diagram ↓</a>
+        </span>
+
+      </div>
+
+      <p class="start-here-photo">
+        <strong>Photo tip:</strong> the forewing base is usually hidden under the hindwing in resting shots —
+        skip any feature that isn't clearly visible. A sharp underside photo with the hindwing fully in view is enough to score most questions.
+      </p>
+
+      <a class="start-here-cta" href="checklist.html">Open Feature Scoring →</a>
+    </div>
+
+    <p class="guide-intro">
+      Reference diagrams for wing space numbering, morphological features, and structural landmarks
+      used in the scoring questions.
+    </p>
+
+    <!-- ── Wing venation ── -->
+    <section class="guide-section" id="wing-spaces">
+      <h2 class="guide-section-title">Wing spaces (venation)</h2>
+      <p class="guide-section-desc">
+        Each area between two adjacent veins on the wing is called a <strong>space</strong>
+        (also written as "cell" in some literature). Spaces are numbered from the inner
+        margin outward. The key questions refer to spots and markings by their space number —
+        for example, "postdiscal spot in space 6" means the spot in the sixth space of the hindwing.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/venation-eumolphus.png"
+               alt="Wing venation diagram of Nacaduba eumolphus showing numbered wing spaces on both forewing and hindwing"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>Wing spaces of <em>Nacaduba eumolphus</em></strong>
+          <p>
+            <strong>Forewing (upper):</strong> spaces 1b, 2–9 along the inner margin and costa; spaces 10–12 toward the apex.<br>
+            <strong>Hindwing (lower):</strong> spaces 1a, 1b along the dorsum; spaces 2–8 extending to the costa. Space 2 bears the tail in tailed species.
+          </p>
+          <div class="guide-terms" role="table" aria-label="Wing space terminology">
+            <span class="guide-term-key" role="rowheader">Space 2 (HW)</span>
+            <span class="guide-term-val" role="cell">Location of the hindwing tail in tailed <em>Nacaduba</em></span>
+            <span class="guide-term-key" role="rowheader">Space 6 (HW)</span>
+            <span class="guide-term-val" role="cell">Key diagnostic space — position of its postdiscal spot relative to spot 5 and the end-cell bar distinguishes the epimuta and agesilaus groups</span>
+            <span class="guide-term-key" role="rowheader">Space 7 (HW)</span>
+            <span class="guide-term-val" role="cell">Used in the ganesa group — whitened gap between spots in this space is diagnostic for <em>A. ammon</em>, <em>A. ammonides</em>, and <em>A. elizabethae</em></span>
+            <span class="guide-term-key" role="rowheader">Space 4 (FW)</span>
+            <span class="guide-term-val" role="cell">Position of the postdiscal spot here (in line or displaced) separates the eumolphus group from the vihara group</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FW postdiscal spots ── -->
+    <section class="guide-section" id="fw-spots">
+      <h2 class="guide-section-title">Forewing postdiscal spots (spaces 4–10)</h2>
+      <p class="guide-section-desc">
+        The forewing postdiscal spots sit in the spaces between the veins, numbered
+        from the inner margin outward. Space 8 is absent in <em>Nacaduba</em> — the numbering
+        jumps from 7 to 9. The annotated photo below (top) shows veins drawn in yellow and
+        spots labelled in green; the unannotated original is shown below for comparison.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/fw-spots-soonchai.jpg"
+               alt="Forewing underside of an Nacaduba with veins drawn in yellow and forewing postdiscal spots 4, 5, 6, 9 and 10 labelled in green; space 7 is noted with the caption 'no space 8 for Nacaduba'"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>Forewing postdiscal spots and space numbering (photo: Soon Chye)</strong>
+          <p>
+            Yellow lines trace the forewing veins; green labels identify spots in spaces 4, 5, 6, 9 and 10.
+            Space 7 is marked with the note <em>"no space 8 for Nacaduba"</em> — in this genus vein 8
+            is absent and the costal spaces jump from 7 directly to 9.
+            The lower panel shows the same photo without annotations for reference.
+          </p>
+          <div class="guide-terms" role="table" aria-label="Forewing space and spot terminology">
+            <span class="guide-term-key" role="rowheader">Spaces 4–6</span>
+            <span class="guide-term-val" role="cell">Main postdiscal band; spot 4 displacement (shifted distad) distinguishes the eumolphus group and A. corinda from other tailed species</span>
+            <span class="guide-term-key" role="rowheader">Space 7</span>
+            <span class="guide-term-val" role="cell">Present in <em>Nacaduba</em>; space 8 is absent — the vein numbering skips from 7 to 9</span>
+            <span class="guide-term-key" role="rowheader">Space 9</span>
+            <span class="guide-term-val" role="cell">Costal spot here is checked in some group separations (e.g. ganesa group)</span>
+            <span class="guide-term-key" role="rowheader">Space 10</span>
+            <span class="guide-term-val" role="cell">Absence of a spot in space 10 is a diagnostic character for A. corinda; two spots in spaces 10 &amp; 11 identify the anthelus group</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FW space 11 central spot ── -->
+    <section class="guide-section" id="fw-space-11">
+      <h2 class="guide-section-title">Central spot in FW space 11</h2>
+      <p class="guide-section-desc">
+        Spaces 10, 11, and 12 are narrow costal spaces near the forewing apex, between the veins
+        and the costa. A <strong>central spot in space 11</strong> is a diagnostic character used in
+        several group separations — it uniquely identifies <em>A. anarte</em> within the camdeo group,
+        separates the alitaeus group from other tailed species, and is checked in the agesias group.
+        The annotated photo below shows the three spaces with the diagnostic spot in space 11 labelled.
+      </p>
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/fw-spaces-10-12.jpg"
+               alt="Forewing underside of an Nacaduba with veins drawn in yellow delineating spaces 10, 11 and 12; the spot in space 11 and space 12 are labelled in green"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>FW spaces 10–12 and the central spot in space 11 (photo: Soon Chye)</strong>
+          <p>
+            Yellow lines trace the veins bounding spaces 10, 11, and 12 near the forewing costa.
+            The green label marks the central spot in space 11 — its presence or absence is used
+            as a key character in several group separations.
+          </p>
+          <div class="guide-terms" role="table" aria-label="Forewing costal space terminology">
+            <span class="guide-term-key" role="rowheader">Space 10</span>
+            <span class="guide-term-val" role="cell">Absence of a spot here is diagnostic for <em>A. corinda</em>; a spot at the base of space 10 is a feature of the anthelus group</span>
+            <span class="guide-term-key" role="rowheader">Space 11 — central spot</span>
+            <span class="guide-term-val" role="cell">Presence of a central spot is unique to <em>A. anarte</em> among the camdeo group; also diagnostic in the alitaeus group and checked in the agesias group</span>
+            <span class="guide-term-key" role="rowheader">Space 12</span>
+            <span class="guide-term-val" role="cell">The outermost costal space, between the distal end of vein 12 and the apex; seldom used as a character in isolation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Spot at base of FW space 10 ── -->
+    <section class="guide-section" id="fw-space10-base-spot">
+      <h2 class="guide-section-title">Spot at the base of FW space 10</h2>
+      <p class="guide-section-desc">
+        A small, isolated spot can sit right at the <strong>extreme base of forewing space 10</strong>
+        — just above vein 10, near the cell-end — distinct from the regular postdiscal row further out.
+        Its presence or absence separates members of the <strong>alitaeus group</strong>
+        (e.g. present in <em>A. pseudomuta</em>, <em>A. sintanga</em>, <em>A. alitaeus</em>,
+        <em>A. denta</em>; absent in <em>A. elopura</em>, <em>A. arianaga</em>, <em>A. ariana</em>,
+        <em>A. aida</em>, <em>A. havilandi</em>) and is also a feature of the anthelus group.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/fw-space10-base-spot-ljk.jpg"
+               alt="Forewing underside of an Nacaduba annotated with yellow lines tracing the veins and a green arrow pointing to the small isolated spot at the extreme base of space 10"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>Spot at the base of FW space 10 (photo: LJK)</strong>
+          <p>
+            Yellow lines trace the veins bounding space 10; the green arrow marks the small,
+            isolated spot sitting right at its extreme base, near the cell-end — separate from
+            the main postdiscal row of spots further toward the termen.
+          </p>
+          <div class="guide-terms" role="table" aria-label="Spot at base of FW space 10">
+            <span class="guide-term-key" role="rowheader">Spot present</span>
+            <span class="guide-term-val" role="cell">Small isolated spot at the extreme base of space 10, just above vein 10 near the cell-end — diagnostic for part of the alitaeus group and a feature of the anthelus group</span>
+            <span class="guide-term-key" role="rowheader">Spot absent</span>
+            <span class="guide-term-val" role="cell">No spot at the base of space 10 — separates species such as <em>A. elopura</em>, <em>A. ariana</em> and <em>A. aida</em> from their alitaeus-group relatives that have it</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Spot 6 & end-cell bar ── -->
+    <section class="guide-section" id="spot6-end-cell-bar">
+      <h2 class="guide-section-title">Postdiscal spot 6 &amp; end-cell bar (<em>A. atosia</em>)</h2>
+      <p class="guide-section-desc">
+        The end-cell bar is a bar-shaped marking at the end of the discal cell — more basally placed
+        than the postdiscal row. In the <strong>epimuta group</strong> (<em>A. atosia</em>, <em>A. lurida</em>,
+        <em>A. epimuta</em>), postdiscal spot 6 is pulled inward from the postdiscal row and sits roughly
+        midway between spot 5 and the end-cell bar. In other <em>Nacaduba</em>, spot 6 remains in the
+        postdiscal band at roughly the same level as spot 5.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/atosia-spot6-endcell.jpg"
+               alt="Nacaduba atosia underside annotated with arrows labelling postdiscal spot 5, postdiscal spot 6, and the end-cell bar, showing spot 6 sitting roughly midway between spot 5 and the bar"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>HW postdiscal spots 5, 6 and the end-cell bar — <em>Nacaduba atosia</em> (photo: Soon Chye)</strong>
+          <p>
+            Spot 6 sits roughly midway between spot 5 (red mark) and the end-cell bar
+            (yellow rectangle) — pulled inward from the postdiscal row rather than remaining
+            level with spot 5. The centres of spots 5, 6 and 7 stay broadly in line (an
+            "echelon" arrangement). This inward displacement of spot 6 is the defining
+            underside character of the epimuta group and the basis of the Q81 question in the key.
+          </p>
+          <div class="guide-terms" role="table" aria-label="End-cell bar and spot 6 terminology">
+            <span class="guide-term-key" role="rowheader">End-cell bar</span>
+            <span class="guide-term-val" role="cell">Bar-shaped marking at the distal end of the discal cell; more basally placed than the postdiscal row</span>
+            <span class="guide-term-key" role="rowheader">Spot 6 — epimuta group</span>
+            <span class="guide-term-val" role="cell">Pulled basally from the postdiscal row — sits roughly midway between spot 5 and the end-cell bar; spots 5, 6 and 7 in echelon (centres broadly in line)</span>
+            <span class="guide-term-key" role="rowheader">Spot 6 — other groups</span>
+            <span class="guide-term-val" role="cell">Remains in the postdiscal band at roughly the same level as spot 5; not displaced toward the cell</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HW spot 6 position (spots 5, 6, 7 alignment) ── -->
+    <section class="guide-section" id="hw-spot6-position">
+      <h2 class="guide-section-title">HW postdiscal spot 6 position — spots 5, 6 and 7</h2>
+      <p class="guide-section-desc">
+        The radial position of postdiscal spot 6 relative to spot 5 and the end-cell bar is one of
+        the most frequently used characters in this key. Three broad categories are distinguished:
+      </p>
+      <ul class="guide-section-list">
+        <li><strong>Not displaced</strong> — spot 6 sits in the postdiscal row, roughly level with spot 5; spots 5, 6 and 7 are broadly in line. This is the condition in most tailed <em>Nacaduba</em>.</li>
+        <li><strong>Midway</strong> — spot 6 is pulled inward from the postdiscal row and sits roughly equidistant between spot 5 and the end-cell bar. Diagnostic of the epimuta and agesilaus groups.</li>
+        <li><strong>Widely out of line / touching bar</strong> — spot 6 is displaced so far inward that its inner edge is in line with, or inside, the inner edge of spot 7, and it typically touches or overlaps the end-cell bar. Spots 5, 6 and 7 are widely out of line. Seen in the aurea, agrata, eumolphus, and related groups.</li>
+      </ul>
+      <p class="guide-section-desc">
+        The photo below (<em>Nacaduba aurea</em>) illustrates these features with annotations.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/hw-spot6-position-aurea.jpg"
+               alt="Nacaduba aurea underside annotated with green arrows pointing to spot 7, spot 6, spot 5, and the end-cell bar, illustrating how spot 6 is widely out of line and touches the end-cell bar"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>HW spots 5, 6 and 7 widely out of line — <em>Nacaduba aurea</em> (photo: Li Zhi Guo)</strong>
+          <p>
+            Green arrows identify spot 7, spot 6, spot 5, and the end-cell bar. Spot 6 is displaced so
+            far inward that its inner edge is in line with the inner edge of spot 7 — it touches or
+            overlaps the end-cell bar, and the three spots are widely out of line with each other.
+          </p>
+          <div class="guide-terms" role="table" aria-label="HW spot 6 position categories">
+            <span class="guide-term-key" role="rowheader">Not displaced</span>
+            <span class="guide-term-val" role="cell">Spot 6 in the postdiscal row; roughly level with spot 5; spots 5, 6 and 7 broadly in line (most tailed species)</span>
+            <span class="guide-term-key" role="rowheader">Midway</span>
+            <span class="guide-term-val" role="cell">Spot 6 roughly equidistant between spot 5 and the end-cell bar; partial inward displacement (epimuta and agesilaus groups)</span>
+            <span class="guide-term-key" role="rowheader">Widely out of line</span>
+            <span class="guide-term-val" role="cell">Spot 6 inner edge in line with or inside inner edge of spot 7; spot 6 touches or overlaps end-cell bar; spots 5, 6 and 7 widely out of line (aurea, agrata, eumolphus and related groups)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HW tail, spots 5–7, FW vein 4, spaces 10–11 ── -->
+    <section class="guide-section" id="hw-tail-spots-fw-spaces">
+      <h2 class="guide-section-title">HW tail, postdiscal spots 5–7, FW vein 4 &amp; spaces 10–11 (<em>A. achelous</em>)</h2>
+      <p class="guide-section-desc">
+        This annotated field photo shows several landmarks used across multiple key questions in a single view.
+        The hindwing postdiscal spots 5, 6 and 7 sit in a row visible in almost any perched photograph;
+        their relative alignment — especially spot 6 — is central to several early questions.
+        FW vein 4 is where the postdiscal band is dislocated in the anthelus group, and spaces 10 and 11 above it
+        are checked for spot presence and count.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/achelous-landmarks.jpg"
+               alt="Nacaduba achelous underside with veins drawn in yellow and green labels marking the tail at vein 2, postdiscal spots 5–7, FW vein 4, and FW spaces 10 and 11"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>Key wing landmarks — <em>Nacaduba achelous</em> (photo: LJK)</strong>
+          <p>
+            Yellow lines trace the major veins. Green labels mark: FW spaces 10 and 11 (above vein 4 toward the apex);
+            FW vein 4 (where the postdiscal band may be dislocated in the anthelus group);
+            HW postdiscal spots 7, 6 and 5 (inner to outer); and the tail emerging at HW vein 2.
+            In this anthelus-group specimen, spots 5, 6 and 7 are broadly aligned in the postdiscal row —
+            spot 6 is not displaced toward the discal cell.
+          </p>
+          <div class="guide-terms" role="table" aria-label="Wing landmark terminology">
+            <span class="guide-term-key" role="rowheader">Tail at vein 2</span>
+            <span class="guide-term-val" role="cell">In tailed <em>Nacaduba</em> the hindwing tail always emerges at vein 2</span>
+            <span class="guide-term-key" role="rowheader">HW spots 5, 6, 7</span>
+            <span class="guide-term-val" role="cell">Postdiscal spots counted from the dorsum outward; their relative alignment — especially spot 6 — is a primary diagnostic character</span>
+            <span class="guide-term-key" role="rowheader">FW vein 4</span>
+            <span class="guide-term-val" role="cell">Dislocation of the postdiscal band at this vein (spot missing in space 4, present in space 10) defines the anthelus group</span>
+            <span class="guide-term-key" role="rowheader">FW spaces 10 &amp; 11</span>
+            <span class="guide-term-val" role="cell">The costal spaces above vein 4; spot presence and count here is used in the anthelus group and for separating the alitaeus and epimuta groups</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FW postdiscal band dislocation at vein 4 ── -->
+    <section class="guide-section" id="fw-band-vein4">
+      <h2 class="guide-section-title">FW postdiscal band partially dislocated at vein 4</h2>
+      <p class="guide-section-desc">
+        In the <strong>cleander group</strong>, the forewing postdiscal band is interrupted at
+        vein 4 — the spot in space 4 is shifted relative to the spots either side of it.
+        <em>Nacaduba silhetensis</em> shows a <strong>partial dislocation</strong>: there is a
+        visible step or kink at vein 4, but the band is not completely broken.
+        This contrasts with a fully straight band (not dislocated) seen in the violet-male
+        subgroup of the cleander group.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/silhetensis-fw-band-vein4.jpg"
+               alt="Nacaduba silhetensis underside annotated with a yellow line pointing to where the forewing postdiscal band is only partially dislocated at vein 4"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>FW postdiscal band partially dislocated at vein 4 — <em>Nacaduba silhetensis</em> (photo: Li Zhi Guo)</strong>
+          <p>
+            The yellow line points to the kink in the forewing postdiscal band at vein 4.
+            In <em>A. silhetensis</em> the dislocation is partial — the band deviates at vein 4
+            but is not completely broken or gapped as in the anthelus group.
+          </p>
+          <div class="guide-terms" role="table" aria-label="FW postdiscal band dislocation at vein 4">
+            <span class="guide-term-key" role="rowheader">Not dislocated</span>
+            <span class="guide-term-val" role="cell">Band runs straight or sinuously through vein 4 without a step; male is violet-blue above (cleander group — violet subgroup)</span>
+            <span class="guide-term-key" role="rowheader">Partially dislocated</span>
+            <span class="guide-term-val" role="cell">Visible step or kink at vein 4 but band not completely broken; diagnostic for <em>A. silhetensis</em> and related species in the cleander group</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FW spot 4 shifted distad (alitaeus group) ── -->
+    <section class="guide-section" id="fw-spot4-distad">
+      <h2 class="guide-section-title">FW postdiscal spot 4 shifted distad — out of line with spots 5 and 6</h2>
+      <p class="guide-section-desc">
+        In the <strong>alitaeus group</strong> (e.g. <em>Nacaduba elopura</em>, <em>A. aida</em>,
+        <em>A. ariana</em>) and several other groups, the forewing postdiscal spot in space 4 is
+        <strong>shifted distad (outward)</strong>, placing it clearly out of line with the spots
+        in spaces 5 and 6. This is a different character from the
+        <a href="#fw-band-vein4">partial dislocation at vein 4</a> seen in the cleander group:
+        there the band keeps a continuous course with only a step or kink, whereas here spot 4
+        is displaced outward as a whole, breaking the line formed by spots 5 and 6.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/elopura-fw-spot4-distad.jpg"
+               alt="Nacaduba elopura underside annotated with an arrow pointing to the forewing postdiscal spot in space 4, shifted distad and out of line with the spots in spaces 5 and 6"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>FW postdiscal spot 4 shifted distad, out of line with spots 5 and 6 — <em>Nacaduba elopura</em> (photo: Gan CW)</strong>
+          <p>
+            The arrow points to the postdiscal spot in space 4: it sits noticeably further out
+            (toward the termen) than the spots in spaces 5 and 6, breaking the line they form —
+            not merely a partial dislocation as seen at vein 4 in the cleander group.
+          </p>
+          <div class="guide-terms" role="table" aria-label="FW postdiscal spot 4 position">
+            <span class="guide-term-key" role="rowheader">Shifted distad</span>
+            <span class="guide-term-val" role="cell">Spot 4 displaced outward, clearly out of line with spots 5 and 6 — diagnostic for the alitaeus group and several other groups (e.g. <em>A. elopura</em>, <em>A. aida</em>, <em>A. ariana</em>)</span>
+            <span class="guide-term-key" role="rowheader">In normal position</span>
+            <span class="guide-term-val" role="cell">Spot 4 in line (or near-continuation) with spots 5 and 6, forming a continuous postdiscal series</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HW space 6 basal spot (hypomuta) ── -->
+    <section class="guide-section" id="hw-space6-basal-spot">
+      <h2 class="guide-section-title">Basal spot in HW space 6 — <em>A. hypomuta</em> vs amphimuta group</h2>
+      <p class="guide-section-desc">
+        In the <strong>hypomuta group</strong>, most Malayan individuals have a small spot at the
+        <em>extreme base</em> of hindwing space 6 on the underside — closer to the wing base than the
+        normal postdiscal row. This spot is absent in the similar <strong>amphimuta group</strong> and
+        is usually also absent in Bornean and Sumatran <em>A. hypomuta</em>.
+        The yellow outline marks HW space 6; the green arrow points to the basal spot.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/hypomuta-space6-spot.jpg"
+               alt="Nacaduba hypomuta underside annotated with a yellow line labelling HW space 6 and green arrows pointing to spot 6, spot 7, the small basal spot at the base of HW space 6, and the end-cell bar"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>Small basal spot in HW space 6 — <em>Nacaduba hypomuta</em> (photo: David Fischer)</strong>
+          <p>
+            The yellow line labels HW space 6. Green arrows identify spot 6, spot 7, the small diagnostic
+            spot at the base of HW space 6, and the end-cell bar. The basal spot sits well inside the
+            postdiscal row — its presence (in Malayan specimens) is the key character separating
+            <em>A. hypomuta</em> from the amphimuta group, which otherwise looks very similar.
+          </p>
+          <div class="guide-terms" role="table" aria-label="HW space 6 basal spot terminology">
+            <span class="guide-term-key" role="rowheader">Basal spot — present</span>
+            <span class="guide-term-val" role="cell">Hypomuta group; small spot at the extreme base of HW space 6, closer to the wing base than the postdiscal row (most Malayan specimens)</span>
+            <span class="guide-term-key" role="rowheader">Basal spot — absent</span>
+            <span class="guide-term-val" role="cell">Amphimuta group; also absent in many Bornean and Sumatran <em>A. hypomuta</em></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HW central cell spot shape (ace vs atosia) ── -->
+    <section class="guide-section" id="hw-central-cell-spot">
+      <h2 class="guide-section-title">HW central cell spot shape — <em>A. ace</em> vs <em>A. atosia</em></h2>
+      <p class="guide-section-desc">
+        The hindwing discal cell underside usually carries a small, separate, more-or-less round
+        central spot. In a few species this spot is enlarged into a <strong>band</strong> spanning
+        the entire width of the cell — an immediately diagnostic difference from the ordinary
+        rounded spot seen in most <em>Nacaduba</em>, including the otherwise similar epimuta group.
+      </p>
+
+      <div class="guide-img-card">
+        <div class="guide-img-wrap">
+          <img src="img/hw-central-cell-spot-ace-atosia.jpg"
+               alt="Side-by-side comparison of two Nacaduba undersides annotated with green arrows pointing to the hindwing discal cell: A. ace shows a band-like central cell spot stretching entirely across the cell, while A. atosia shows a normal, rounded central cell spot"
+               loading="lazy">
+        </div>
+        <div class="guide-img-caption">
+          <strong>HW central cell spot — band-like vs rounded (photos: Gan CW, Soon Chye)</strong>
+          <p>
+            In <em>Nacaduba ace</em> (top — ace subgroup of the agrata group) the central cell spot
+            is band-like, stretching entirely across the cell — the defining character of the
+            subgroup. In <em>Nacaduba atosia</em> (bottom — epimuta group) the central cell spot is
+            normal and rounded, as in most other <em>Nacaduba</em>. This shape is the first
+            character checked when separating the ace subgroup from the rest of the tailed
+            agrata-group candidates.
+          </p>
+          <div class="guide-terms" role="table" aria-label="HW central cell spot shape categories">
+            <span class="guide-term-key" role="rowheader">Band-like</span>
+            <span class="guide-term-val" role="cell">Spot enlarged into a band stretching entirely across the discal cell — diagnostic of the ace subgroup (<em>A. ace</em>)</span>
+            <span class="guide-term-key" role="rowheader">Normal / rounded</span>
+            <span class="guide-term-val" role="cell">Small, separate, more-or-less round spot — the usual condition, including the epimuta group (<em>A. atosia</em>, <em>A. lurida</em>, <em>A. epimuta</em>)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Hamburger menu overlay -->
+  <div id="menu-overlay" class="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="menu-panel">
+      <div class="menu-header">
+        <h2 class="menu-title">Nacaduba ID</h2>
+        <button id="menu-close" class="menu-close" aria-label="Close menu">✕</button>
+      </div>
+      <nav class="menu-nav" aria-label="Navigation">
+        <a href="index.html" class="menu-nav-item" id="nav-home" aria-label="Home — where to start">
+          <span class="menu-nav-item-label">Home</span>
+          <span class="menu-nav-item-desc">Where to start</span>
+        </a>
+        <a href="checklist.html" class="menu-nav-item" id="nav-scoring" aria-label="Feature Scoring — score multiple features at once">
+          <span class="menu-nav-item-label">Feature Scoring</span>
+          <span class="menu-nav-item-desc">Score multiple features at once</span>
+        </a>
+        <a href="species.html" class="menu-nav-item" id="nav-species" aria-label="Species Search — browse all covered taxa">
+          <span class="menu-nav-item-label">Species Search</span>
+          <span class="menu-nav-item-desc">Browse all covered taxa</span>
+        </a>
+        <button class="menu-nav-item active" id="nav-guide" aria-label="Visual Guide — wing diagrams and terminology">
+          <span class="menu-nav-item-label">Visual Guide</span>
+          <span class="menu-nav-item-desc">Wing diagrams &amp; terminology</span>
+        </button>
+        <a href="about.html" class="menu-nav-item" id="nav-about" aria-label="About — how to use this app">
+          <span class="menu-nav-item-label">About</span>
+          <span class="menu-nav-item-desc">How to use this app</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const overlay  = document.getElementById('menu-overlay');
+      const openBtn  = document.getElementById('menu-btn');
+      const closeBtn = document.getElementById('menu-close');
+      const guideBtn = document.getElementById('nav-guide');
+      function open()  { overlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+      function close() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+      openBtn.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      if (guideBtn) guideBtn.addEventListener('click', close);
+      overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive decision tree for identifying common Malaysian Nacaduba (Six-line Blue) butterfly species.">
+  <meta name="theme-color" content="#2d5a27">
+  <title>Nacaduba ID — Malaysian Six-line Blue Butterflies</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="loading" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <span>Loading identification key…</span>
+  </div>
+
+  <div id="app-topbar" class="app-topbar" style="display:none;">
+    <button class="menu-btn app-topbar-menu-btn" id="menu-btn" aria-label="Open menu">&#9776;</button>
+    <span class="app-topbar-title">ID Key</span>
+  </div>
+
+  <!-- Persistent menu overlay — lives outside #app so render() never wipes it -->
+  <div id="menu-overlay" class="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="menu-panel">
+
+      <div class="menu-header">
+        <h2 class="menu-title">Nacaduba ID</h2>
+        <button id="menu-close" class="menu-close" aria-label="Close menu">✕</button>
+      </div>
+
+      <nav class="menu-nav" aria-label="Navigation">
+        <a href="index.html" class="menu-nav-item" id="nav-home" aria-label="Home — where to start">
+          <span class="menu-nav-item-label">Home</span>
+          <span class="menu-nav-item-desc">Where to start</span>
+        </a>
+        <a href="checklist.html" class="menu-nav-item" id="nav-scoring" aria-label="Feature Scoring — score multiple features at once">
+          <span class="menu-nav-item-label">Feature Scoring</span>
+          <span class="menu-nav-item-desc">Score multiple features at once</span>
+        </a>
+        <a href="species.html" class="menu-nav-item" id="nav-species" aria-label="Species Search — browse all covered taxa">
+          <span class="menu-nav-item-label">Species Search</span>
+          <span class="menu-nav-item-desc">Browse all covered taxa</span>
+        </a>
+        <a href="guide.html" class="menu-nav-item" id="nav-guide" aria-label="Visual Guide — wing diagrams and terminology">
+          <span class="menu-nav-item-label">Visual Guide</span>
+          <span class="menu-nav-item-desc">Wing diagrams &amp; terminology</span>
+        </a>
+        <button class="menu-nav-item active" id="nav-idkey" aria-label="ID Key — step-by-step identification">
+          <span class="menu-nav-item-label">ID Key</span>
+          <span class="menu-nav-item-desc">Step-by-step identification</span>
+        </button>
+        <a href="about.html" class="menu-nav-item" id="nav-about" aria-label="About — how to use this app">
+          <span class="menu-nav-item-label">About</span>
+          <span class="menu-nav-item-desc">How to use this app</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <div id="app" style="display:none;" role="main"></div>
+
+  <noscript>
+    <div style="padding:2rem;text-align:center;font-family:sans-serif;">
+      <p>This identification tool requires JavaScript to run.<br>
+      Please enable JavaScript in your browser and reload the page.</p>
+    </div>
+  </noscript>
+
+  <script src="js/path-utils.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
