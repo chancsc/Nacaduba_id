@@ -1,11 +1,488 @@
 {
-  "start": "q_placeholder",
+  "start": "q_group",
   "nodes": {
-    "q_placeholder": {
+    "q_group": {
       "type": "question",
-      "id": "q_placeholder",
-      "question": "Placeholder — Nacaduba identification tree not yet built.",
-      "choices": []
+      "id": "q_group",
+      "question": "On the underside of the forewing, look inside the discal cell (the large cell near the wing base). Are there two pale subbasal lines crossing the cell?",
+      "hint": "Hold the wing to a light source if needed. Two lines = 6-line Blue (berenice group). No lines = 4-line Blue (pactolus group). This is the primary split for all Nacaduba.",
+      "choices": [
+        {
+          "label": "Yes — two pale lines cross the cell",
+          "next": "q_b_biocellata"
+        },
+        {
+          "label": "No — no subbasal lines in the cell",
+          "next": "q_p_size"
+        },
+        {
+          "label": "Cannot determine",
+          "next": "q_tail"
+        }
+      ]
+    },
+    "q_b_biocellata": {
+      "type": "question",
+      "id": "q_b_biocellata",
+      "question": "On the underside of the hindwing, are there two large, equal-sized black spots ringed with orange in spaces 1b and 2 (near the tornus), prominent enough to show through to the upperside?",
+      "hint": "In N. biocellata these two eye-spots are a striking and unique feature — conspicuous, orange-ringed, and visible by transparency. In all other 6-line species the tornal area is much more subdued.",
+      "choices": [
+        {
+          "label": "Yes — two prominent orange-ringed spots",
+          "next": "r_biocellata"
+        },
+        {
+          "label": "No — tornal markings not like that",
+          "next": "q_b_base"
+        }
+      ]
+    },
+    "r_biocellata": {
+      "type": "result",
+      "id": "r_biocellata",
+      "name": "Nacaduba biocellata",
+      "taxon_id": 353667,
+      "note": "Two-spotted Line Blue. The two large orange-ringed black spots on the hindwing underside (spaces 1b and 2) are unique in the genus. Both spots are equal-sized and visible by transparency on the upperside."
+    },
+    "q_b_base": {
+      "type": "question",
+      "id": "q_b_base",
+      "question": "On the underside, are the wing bases (the area closest to the body) noticeably darkened compared with the rest of the wing?",
+      "hint": "In N. beroe the basal area is distinctly darker, giving a two-toned appearance. In all other 6-line blues the ground color is relatively even from base to margin.",
+      "choices": [
+        {
+          "label": "Yes — bases clearly darkened",
+          "next": "r_beroe"
+        },
+        {
+          "label": "No — ground color even throughout",
+          "next": "q_b_transparency"
+        }
+      ]
+    },
+    "r_beroe": {
+      "type": "result",
+      "id": "r_beroe",
+      "name": "Nacaduba beroe",
+      "taxon_id": 196827,
+      "note": "Opaque Six-line Blue. Darkened wing bases on the underside are the key character separating it from N. kurava. Male upperside markings are not visible by transparency. Forewing 12-15 mm."
+    },
+    "q_b_transparency": {
+      "type": "question",
+      "id": "q_b_transparency",
+      "question": "On the male upperside, are the underside markings (striae) visible by transparency through the wing membrane?",
+      "hint": "In N. kurava the wings are notably translucent and the underside pattern shows through clearly on the upperside. Best assessed on a freshly set or spread specimen. In females this character is not useful — choose the second option and continue.",
+      "choices": [
+        {
+          "label": "Yes — underside markings show through on upperside (male)",
+          "next": "r_kurava"
+        },
+        {
+          "label": "No — upperside appears opaque, or female specimen",
+          "next": "q_b_ribbon"
+        }
+      ]
+    },
+    "r_kurava": {
+      "type": "result",
+      "id": "r_kurava",
+      "name": "Nacaduba kurava",
+      "taxon_id": 179385,
+      "note": "Transparent Six-line Blue. Wing bases not darkened on underside (unlike N. beroe); underside markings visible by transparency through the male upperside. Forewing 13.5-15 mm."
+    },
+    "q_b_ribbon": {
+      "type": "question",
+      "id": "q_b_ribbon",
+      "question": "On the male upperside, does the wing surface have an abundance of white ribbon scales, giving the wings a frosted or slightly iridescent sheen?",
+      "hint": "White ribbon scales in N. berenice give a slightly shimmery pale look compared with the deeper, more uniform purple-blue of N. calauria and N. kirtoni. Check the discal area of the forewing. Not applicable to females.",
+      "choices": [
+        {
+          "label": "Yes — white ribbon scales visible, frosted look (male)",
+          "next": "r_berenice"
+        },
+        {
+          "label": "No — wings deeper purple-blue, no ribbon scales (male)",
+          "next": "q_b_elevation"
+        },
+        {
+          "label": "Female or cannot determine ribbon scales",
+          "next": "q_b_elevation"
+        }
+      ]
+    },
+    "r_berenice": {
+      "type": "result",
+      "id": "r_berenice",
+      "name": "Nacaduba berenice",
+      "taxon_id": 473919,
+      "note": "Rounded Six-line Blue. Male has abundant white ribbon scales on upperside (distinguishing it from N. calauria). Tornal spot in HW space 2 is black with metallic green scales and a pale orange halo. Common lowland forest species. Forewing 11-13 mm."
+    },
+    "q_b_elevation": {
+      "type": "question",
+      "id": "q_b_elevation",
+      "question": "Was this butterfly found at a high elevation (above approximately 1200 m)?",
+      "hint": "N. kirtoni is a highland specialist recorded above 1200 m. N. calauria occurs at lower elevations. The two are nearly identical on the underside and can only be reliably separated by male genitalia examination.",
+      "choices": [
+        {
+          "label": "Yes — recorded above 1200 m elevation",
+          "next": "g_berenice_kirtoni"
+        },
+        {
+          "label": "No — lowland or mid-elevation record",
+          "next": "r_calauria"
+        },
+        {
+          "label": "Elevation unknown",
+          "next": "g_berenice_kirtoni"
+        }
+      ]
+    },
+    "r_calauria": {
+      "type": "result",
+      "id": "r_calauria",
+      "name": "Nacaduba calauria",
+      "taxon_id": 498175,
+      "note": "Malay Six-line Blue. Male lacks white ribbon scales on upperside and is a deeper purple-blue than N. berenice. Wing bases not darkened. Lowland to mid-elevation forest. Forewing similar in size to N. berenice."
+    },
+    "g_berenice_kirtoni": {
+      "type": "group",
+      "id": "g_berenice_kirtoni",
+      "group_name": "Cannot separate from photographs",
+      "members": [
+        "Nacaduba berenice",
+        "Nacaduba calauria",
+        "Nacaduba kirtoni"
+      ],
+      "note": "N. kirtoni (highland >1200 m) is nearly identical to N. berenice on the underside. N. calauria differs in lacking white ribbon scales on the male upperside. Reliable separation of kirtoni from berenice or calauria requires examination of male genitalia."
+    },
+    "q_p_size": {
+      "type": "question",
+      "id": "q_p_size",
+      "question": "What is the approximate forewing length? (Measure from base to apex along the costa.)",
+      "hint": "Size is a useful first cut in the 4-line group. Large = 14 mm and above. Small-medium = under 14 mm. If you cannot measure, use Cannot determine to start with the large-species questions.",
+      "choices": [
+        {
+          "label": "Large: forewing 14 mm or more",
+          "next": "q_p_large"
+        },
+        {
+          "label": "Small-medium: forewing under 14 mm",
+          "next": "q_p_small"
+        },
+        {
+          "label": "Cannot determine size",
+          "next": "q_p_large"
+        }
+      ]
+    },
+    "q_p_large": {
+      "type": "question",
+      "id": "q_p_large",
+      "question": "On the underside of the hindwing, is there a prominent rounded black submarginal spot in space 6 (the upper part of the wing, near the costal margin)?",
+      "hint": "In N. angusta the black submarginal spots in spaces 2 and 6 are both large and prominent — space 6 especially stands out. In N. pactolus and the other large species this spot is absent or very inconspicuous.",
+      "choices": [
+        {
+          "label": "Yes — large black submarginal spot in space 6",
+          "next": "r_angusta"
+        },
+        {
+          "label": "No — no prominent spot in space 6",
+          "next": "q_p_striae"
+        }
+      ]
+    },
+    "r_angusta": {
+      "type": "result",
+      "id": "r_angusta",
+      "name": "Nacaduba angusta",
+      "taxon_id": 498161,
+      "note": "White-edged Blue. Large species (FW 14-15.5 mm). Distinguished by prominent large black submarginal spots in spaces 2 and 6 on the hindwing underside. Striae broader and more diffuse than most congeners."
+    },
+    "q_p_striae": {
+      "type": "question",
+      "id": "q_p_striae",
+      "question": "On the forewing underside, are the striae (the pale paired markings) broad, diffuse, and distinctly yellowish — so diffuse that the postdiscal band appears almost blended into the ground colour?",
+      "hint": "N. pactolus has the broadest, most diffuse, most yellowish striae of any species in the genus. The postdiscal band nearly loses its structure. Compare with N. solta and N. pendleburyi which have cleaner, whiter striae.",
+      "choices": [
+        {
+          "label": "Yes — striae broad, diffuse, yellowish",
+          "next": "r_pactolus"
+        },
+        {
+          "label": "No — striae whiter or more defined",
+          "next": "q_p_fwband"
+        }
+      ]
+    },
+    "r_pactolus": {
+      "type": "result",
+      "id": "r_pactolus",
+      "name": "Nacaduba pactolus",
+      "taxon_id": 320251,
+      "note": "Large Four-line Blue. Largest common 4-line blue (FW 14.5-16 mm). Striae on underside are broader and more diffuse than any other species except N. angusta; distinctly yellowish. Ground colour between postdiscal striae is unicolorous buff-grey."
+    },
+    "q_p_fwband": {
+      "type": "question",
+      "id": "q_p_fwband",
+      "question": "On the forewing underside, look at the postdiscal band from vein 3 to vein 7. Is the band notably straight and continuous, running in an almost unbroken line?",
+      "hint": "In N. solta the postdiscal band is described as continuous and almost straight from v3 to v7. In N. pendleburyi and others the band may be angled or show slight dislocation.",
+      "choices": [
+        {
+          "label": "Yes — band straight and continuous from v3 to v7",
+          "next": "r_solta"
+        },
+        {
+          "label": "No — band angled, slightly curved, or dislocated",
+          "next": "q_p_pendleburyi"
+        }
+      ]
+    },
+    "r_solta": {
+      "type": "result",
+      "id": "r_solta",
+      "name": "Nacaduba solta",
+      "taxon_id": 1569161,
+      "note": "Four-line Blue. Rare species. FW postdiscal band is continuous and almost straight from vein 3 to vein 7 on the underside — key character. Male upperside is purple with a slight bronzy tint; black border is a narrow thread. FW 15-16 mm."
+    },
+    "q_p_pendleburyi": {
+      "type": "question",
+      "id": "q_p_pendleburyi",
+      "question": "On the hindwing underside, are the inner submarginal striae and the outer postdiscal striae widely separated in spaces 4 and 5 — by at least half the width of the postdiscal band?",
+      "hint": "This wide gap is a key character for N. pendleburyi. Also check whether the forewing black border on the upperside widens appreciably toward the apex (another pendleburyi character). Compare with N. hermus and N. subperusia where these striae nearly touch.",
+      "choices": [
+        {
+          "label": "Yes — striae widely separated in spaces 4 and 5",
+          "next": "r_pendleburyi"
+        },
+        {
+          "label": "No — striae close together or nearly touching in spaces 4 and 5",
+          "next": "q_p_hermus"
+        }
+      ]
+    },
+    "r_pendleburyi": {
+      "type": "result",
+      "id": "r_pendleburyi",
+      "name": "Nacaduba pendleburyi",
+      "taxon_id": 1392198,
+      "note": "Malayan Four-line Blue. Inner submarginal and outer postdiscal striae on HW underside separated by at least half the postdiscal band width. FW black border widens toward apex on upperside. Male lacks white ribbon scales. FW 14-16 mm."
+    },
+    "q_p_hermus": {
+      "type": "question",
+      "id": "q_p_hermus",
+      "question": "On the hindwing underside, look at the tornal spot in space 2 (the black spot with a coloured ring near the inner angle). What colour is the ring around the black spot?",
+      "hint": "This is the most reliable character separating N. hermus from N. subperusia. In N. hermus the ring is brownish-orange (dull, brownish tint). In N. subperusia the ring is a clear bright orange. Both species share nearly-touching striae in HW spaces 4-5.",
+      "choices": [
+        {
+          "label": "Brownish-orange (dull, brownish tint)",
+          "next": "r_hermus"
+        },
+        {
+          "label": "Clear bright orange",
+          "next": "r_subperusia"
+        },
+        {
+          "label": "Cannot determine ring colour",
+          "next": "q_p_hermus_ribbon"
+        }
+      ]
+    },
+    "q_p_hermus_ribbon": {
+      "type": "question",
+      "id": "q_p_hermus_ribbon",
+      "question": "On the male upperside, does the wing surface have an abundance of white ribbon scales, giving a distinctly frosted appearance?",
+      "hint": "Male N. hermus has abundant white ribbon scales giving a frosted look. Male N. subperusia lacks these ribbon scales. Not useful in females.",
+      "choices": [
+        {
+          "label": "Yes — frosted look with white ribbon scales (male)",
+          "next": "r_hermus"
+        },
+        {
+          "label": "No — no ribbon scales visible, or female",
+          "next": "r_subperusia"
+        },
+        {
+          "label": "Cannot determine / possibly a smaller species",
+          "next": "q_p_small"
+        }
+      ]
+    },
+    "r_hermus": {
+      "type": "result",
+      "id": "r_hermus",
+      "name": "Nacaduba hermus",
+      "taxon_id": 841606,
+      "note": "Pale Four-line Blue. Submarginal and postdiscal striae nearly touching in HW spaces 4-5. Tornal spot in HW space 2 has a brownish-orange ring. Male upperside is frosted with abundant white ribbon scales. Striae pale buff in males, whitish in females. FW 13-15 mm."
+    },
+    "r_subperusia": {
+      "type": "result",
+      "id": "r_subperusia",
+      "name": "Nacaduba subperusia",
+      "taxon_id": 841608,
+      "note": "Four-line Blue. Very similar to N. hermus. Submarginal and postdiscal striae nearly touching in HW spaces 4-5. Tornal spot in HW space 2 has a clear bright orange ring (not brownish). Male lacks white ribbon scales on upperside. FW 13-16 mm (larger at high elevations in ssp. intricata)."
+    },
+    "q_p_small": {
+      "type": "question",
+      "id": "q_p_small",
+      "question": "On the forewing underside, is the postdiscal band curved inward toward the wing base and slightly dislocated (offset) at vein 6?",
+      "hint": "This feature — curving inward with a slight step at v6 — is shared by N. sanaya and N. asaga. In N. pavana, N. russelli, and N. normani the postdiscal band does not show this characteristic stepped dislocation.",
+      "choices": [
+        {
+          "label": "Yes — band curves inward and shows a step/dislocation at vein 6",
+          "next": "q_p_sanaya_asaga"
+        },
+        {
+          "label": "No — band not notably dislocated at vein 6",
+          "next": "q_p_pavana"
+        }
+      ]
+    },
+    "q_p_sanaya_asaga": {
+      "type": "question",
+      "id": "q_p_sanaya_asaga",
+      "question": "On the male upperside, does the wing have a distinct steely grey tint to the purple colouration? Also: is the forewing 15-16 mm, or is the specimen from Borneo?",
+      "hint": "N. asaga males have a distinctive steely grey tint to their purple wings; they are also larger (FW 15-16 mm) and recorded only from Borneo (not the Malay Peninsula). N. sanaya is smaller (FW 13-14.5 mm) and lacks the steely grey tint.",
+      "choices": [
+        {
+          "label": "Yes — steely grey tint on male, or FW 15-16 mm, or Borneo record",
+          "next": "r_asaga"
+        },
+        {
+          "label": "No — no steely grey tint, FW 13-14.5 mm, Malay Peninsula record",
+          "next": "r_sanaya"
+        },
+        {
+          "label": "Cannot determine",
+          "next": "q_locality_sanaya"
+        }
+      ]
+    },
+    "q_locality_sanaya": {
+      "type": "question",
+      "id": "q_locality_sanaya",
+      "question": "Was the specimen recorded from Borneo (Sabah, Sarawak, or Brunei)?",
+      "hint": "N. asaga is known only from Borneo and is not recorded on the Malay Peninsula. N. sanaya occurs on the Malay Peninsula. If locality is known, use it to distinguish the two.",
+      "choices": [
+        {
+          "label": "Yes — Borneo record",
+          "next": "r_asaga"
+        },
+        {
+          "label": "No — Malay Peninsula",
+          "next": "r_sanaya"
+        },
+        {
+          "label": "Locality unknown",
+          "next": "g_sanaya_asaga"
+        }
+      ]
+    },
+    "r_asaga": {
+      "type": "result",
+      "id": "r_asaga",
+      "name": "Nacaduba asaga",
+      "note": "Four-line Blue. Bornean species (not recorded on Malay Peninsula). FW postdiscal band curved inward, slightly dislocated at vein 6. Striae narrow and white. Male upperside purple with distinct steely grey tint; black border a narrow thread. FW 15-16 mm."
+    },
+    "r_sanaya": {
+      "type": "result",
+      "id": "r_sanaya",
+      "name": "Nacaduba sanaya",
+      "taxon_id": 149567,
+      "note": "Jewelled Four-line Blue. FW postdiscal band curved inward and slightly dislocated at vein 6. Striae narrow, white, well-defined. Inner submarginal and outer postdiscal striae on HW separated by at least half the postdiscal band width. FW 13-14.5 mm."
+    },
+    "g_sanaya_asaga": {
+      "type": "group",
+      "id": "g_sanaya_asaga",
+      "group_name": "Cannot separate from photographs",
+      "members": [
+        "Nacaduba sanaya",
+        "Nacaduba asaga"
+      ],
+      "note": "Both share the curved FW postdiscal band dislocated at vein 6 and narrow white striae. Separation relies on the steely grey tint of the male upperside in N. asaga, its larger size (15-16 mm vs 13-14.5 mm), and its restriction to Borneo."
+    },
+    "q_p_pavana": {
+      "type": "question",
+      "id": "q_p_pavana",
+      "question": "On the male upperside, is the wing colour a pale greyish-blue (notably paler and greyer than most Nacaduba)?",
+      "hint": "N. pavana males are distinctively pale greyish-blue. N. russelli males are more richly coloured (richer blue or purple). Both are small species (FW 11-12 mm) very similar on the underside. If female or worn, use the last option.",
+      "choices": [
+        {
+          "label": "Yes — pale greyish-blue male upperside",
+          "next": "r_pavana"
+        },
+        {
+          "label": "No — richer blue or purple male upperside",
+          "next": "g_russelli_normani"
+        },
+        {
+          "label": "Female or cannot determine upperside colour",
+          "next": "g_pavana_russelli_normani"
+        }
+      ]
+    },
+    "r_pavana": {
+      "type": "result",
+      "id": "r_pavana",
+      "name": "Nacaduba pavana",
+      "taxon_id": 498171,
+      "note": "Four-line Blue. Small species (FW 11-12 mm). Male upperside is a distinctive pale greyish-blue, distinguishing it from N. russelli. Postdiscal band not curved or dislocated at vein 6. No subbasal lines in FW cell."
+    },
+    "g_russelli_normani": {
+      "type": "group",
+      "id": "g_russelli_normani",
+      "group_name": "Cannot separate from photographs",
+      "members": [
+        "Nacaduba russelli",
+        "Nacaduba normani"
+      ],
+      "note": "Both are small 4-line blues (FW ~11-12 mm) with richer male upperside colouration than N. pavana. N. russelli is very rare and resembles N. pavana on the underside but is richer on the upperside. N. normani has limited published underside characters. Reliable separation requires specialist examination."
+    },
+    "g_pavana_russelli_normani": {
+      "type": "group",
+      "id": "g_pavana_russelli_normani",
+      "group_name": "Cannot separate from photographs",
+      "members": [
+        "Nacaduba pavana",
+        "Nacaduba russelli",
+        "Nacaduba normani"
+      ],
+      "note": "Small 4-line blues (FW ~11-12 mm) with no subbasal lines in FW cell and postdiscal band not dislocated at vein 6. Separation relies on male upperside colour (pavana = pale greyish-blue; russelli = richer) which cannot be assessed in females or worn specimens. N. normani has limited comparative data."
+    },
+    "q_tail": {
+      "type": "question",
+      "id": "q_tail",
+      "question": "Does the hindwing have a short filamentous tail at vein 2?",
+      "hint": "All Nacaduba species in the Malaysian region have a tail at vein 2. If a tail is present this confirms Nacaduba. If no tail is visible the specimen may be worn, or may not be Nacaduba.",
+      "choices": [
+        {
+          "label": "Yes — small tail present at vein 2",
+          "next": "q_cd_entry"
+        },
+        {
+          "label": "No tail visible (may be worn)",
+          "next": "q_cd_entry"
+        }
+      ]
+    },
+    "q_cd_entry": {
+      "type": "question",
+      "id": "q_cd_entry",
+      "question": "Hold the forewing underside up to a good light source and look inside the discal cell (near the wing base). Can you now make out any pair of pale subbasal lines crossing the cell?",
+      "hint": "6-line Blues (berenice group) have a distinct double pale line inside the cell, visible in good light even when not obvious at first. If any pale lines are visible select Yes. If definitely absent or still uncertain, select No or Cannot determine.",
+      "choices": [
+        {
+          "label": "Yes — faint double lines now visible in cell",
+          "next": "q_b_biocellata"
+        },
+        {
+          "label": "No — definitely no lines present",
+          "next": "q_p_size"
+        },
+        {
+          "label": "Cannot determine",
+          "next": "q_p_size"
+        }
+      ]
     }
   }
 }
