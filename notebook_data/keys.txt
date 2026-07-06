@@ -1,0 +1,15 @@
+Query: share all the diagnostic key of Nacaduba in full text, exclude plate info and visual reference
+
+The following is the full text of the diagnostic identification keys for the genus Nacaduba:
+
+1 (22): Underside forewing without a pair of pale subbasal lines in the cell. (pavana group).
+2 (3): Underside hindwing with a prominent rounded black submarginal spot in space 6. Fwl 14.0–15.5 mm. ... Nacaduba angusta
+3: Underside hindwing without a prominent submarginal spot in space 6.
+4 (7): Underside postdiscal band composed of a double series of pale striae inwardly bounded by darker lines with the space between them paler than the ground colour.
+5 (6): ♂ upperside pale greyish blue, border a thread. ♀ upperside brown, with a wedge-shaped, pale blue discal patch on the forewing and basal blue dusting on the hindwing. Fwl 11.0–12.0 mm. ... Nacaduba pavana
+6: ♂ rather pale purple blue, border inwardly diffuse. ♀ as in N. pavana but blue patch darker. Fwl 11.0–12.0 mm. ... Nacaduba russelli
+7: Underside with the area between the postdiscal striae unicolorous and of the ground colour.
+8 (9): Underside striae broad, diffuse and yellowish. Fwl 14.5–16.0 mm. ... Nacaduba pactolus
+9: Underside striae narrow and well defined, slightly wider in ♀ than in ♂.
+10 (13): Underside hindwing with inner submarginal and outer postdiscal striae in spaces 4 and 5 nearly touching; striae pale buff in ♂, whitish in ♀.
+11 (12): ♂ upperside violet blue, with a slightly frosted appearance, border a thread. ♀ upperside pale shining blue, with only a very slight purple tinge. Underside hindwing tornal black spot in space 2 crowned by
