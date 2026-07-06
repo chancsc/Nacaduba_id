@@ -2,7 +2,7 @@
 """
 Query the Butterflies of Peninsular Malaysia notebook for Nacaduba species.
 Saves each response to nacaduba_data/{species_name}.txt
-Respects the 200 queries/day limit — skips species already queried.
+Respects the 40 queries/day limit — skips species already queried.
 """
 
 import json
@@ -87,7 +87,7 @@ def query_species(species: str, prompt_override: str | None = None) -> str | Non
         return None
 
     question = prompt_override or (
-        f"{species} - share the underside ID keys, including tail info"
+        f"{species} - share the Diagnostic Key Path (with Key Numbers)"
     )
 
     print(f"[QUERY] {species} ...", flush=True)
