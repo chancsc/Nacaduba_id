@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.pyc
+
+# Node / temporary tooling (e.g. playwright-core installed for smoke tests)
+node_modules/
+package-lock.json
+
+# OS / editor
+.DS_Store
