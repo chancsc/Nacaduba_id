@@ -396,6 +396,70 @@ function buildPathDisplay(paths, note, resultFeatures, resultName) {
   return html;
 }
 
+// ===== C&P key path (read-only, species detail) =====
+
+// The real Corbet & Pendlebury lead number for a couplet (first int in `leads`).
+function cpNumA(cp) {
+  const m = String(cp && cp.leads || '').match(/\d+/);
+  return m ? m[0] : String((cp && cp.label || '').replace(/^K/, ''));
+}
+
+// Walk the couplet chain once from couplets[0], tracking the current couplet,
+// and record for every species the Yes/No route the key takes to reach it.
+// This mirrors the id_keys.js navigation model (explicit next_a / next_b), so
+// the trail is identical in step sequence to the scoring page's breadcrumb.
+// NOTE: if the A/B routing rules change, update BOTH this and id_keys.js.
+function buildCPKeyPaths(couplets) {
+  const paths = new Map();
+  if (!couplets || !couplets.length) return paths;
+  const byId = new Map(couplets.map(c => [c.id, c]));
+
+  // First route to reach a species wins (DFS visits Yes before No), so a species
+  // on two branches (e.g. subperusia lysa/intricata) shows its earliest route.
+  const assign = (names, steps) => {
+    (names || []).forEach(name => {
+      const key = name.split(' ').slice(0, 2).join(' ');
+      if (!paths.has(key)) paths.set(key, steps);
+    });
+  };
+
+  const walk = (cp, steps) => {
+    if (!cp) return;
+    const yesStep = { numA: cpNumA(cp), text: cp.a_text, yes: true };
+    if (!cp.next_a) assign(cp.species_a, steps.concat([yesStep]));
+    else walk(byId.get(cp.next_a), steps.concat([yesStep]));
+
+    const noStep = { numA: cpNumA(cp), text: cp.a_text, yes: false };
+    if (!cp.next_b) assign(cp.species_b, steps.concat([noStep]));
+    else walk(byId.get(cp.next_b), steps.concat([noStep]));
+  };
+
+  walk(couplets[0], []);
+  return paths;
+}
+
+function buildCPKeyPath(sp) {
+  if (!state.cpKeyPaths || !sp) return '';
+  const key = String(sp.name || '').split(' ').slice(0, 2).join(' ');
+  const steps = state.cpKeyPaths.get(key);
+  if (!steps || !steps.length) return '';
+
+  const rows = steps.map(s => `
+      <li class="path-step cp-path-step">
+        <span class="path-q"><span class="path-qnum">Key ${escapeHtml(s.numA)}</span> ${escapeHtml(s.text)}</span>
+        <span class="path-a cp-path-a${s.yes ? '' : ' cp-path-a--no'}">↳ ${s.yes ? 'Yes' : 'No'}</span>
+      </li>`).join('');
+
+  return `
+    <details class="path-details cp-path-details">
+      <summary class="path-summary">C&amp;P key path — ${steps.length} step${steps.length !== 1 ? 's' : ''}</summary>
+      <div class="path-content">
+        <ol class="path-steps cp-path-steps">${rows}</ol>
+      </div>
+    </details>
+  `;
+}
+
 // ===== Photo gallery =====
 
 function buildPhotoGallery(species) {
@@ -596,6 +660,16 @@ async function initSpeciesPage() {
     state.speciesIndex = buildSpeciesIndex(treeData, speciesData);
     state.questionNumbers = buildQuestionNumbers(treeData);
     state.simCdPaths = simCdRes.ok ? new Map(Object.entries(await simCdRes.json())) : null;
+
+    // C&P key path (optional, read-only) — the route the Corbet & Pendlebury
+    // key takes to reach each species, shown in the species detail panel.
+    try {
+      const idKeyRes = await fetch('data/id_key.json', { cache: 'no-cache' });
+      state.cpKeyPaths = idKeyRes.ok
+        ? buildCPKeyPaths((await idKeyRes.json()).couplets || [])
+        : null;
+    } catch (e) { state.cpKeyPaths = null; }
+
     loadingEl.style.display = 'none';
     appEl.style.display = '';
 
@@ -673,6 +747,7 @@ function showSpeciesDetailInline(sp) {
     ${sp.common_name ? `<p class="species-name">${escapeHtml(sp.name)}</p>` : ''}
     ${noteHTML}
     ${buildPathDisplay(sp.paths, sp.note, sp.resultFeatures, sp.name)}
+    ${buildCPKeyPath(sp)}
     <a class="btn-inat" href="${escapeAttr(sp.inat_url)}" target="_blank" rel="noopener noreferrer">
       ${iconExternal()} View on iNaturalist
     </a>

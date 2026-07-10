@@ -900,6 +900,16 @@ details[open] .path-summary::before { content: '▼ '; }
   font-style: italic;
 }
 
+/* C&P key path — read-only route in the species detail panel.
+   The "Key N" badge is the meaningful number, so the step-counter bubble is
+   suppressed. */
+.cp-path-step {
+  counter-increment: none;
+  padding-left: 0;
+}
+.cp-path-step::before { display: none; }
+.cp-path-a--no { color: #b5651d; }
+
 .path-details--skip .path-summary {
   background: #fdf8ef;
   color: var(--accent);
