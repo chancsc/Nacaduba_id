@@ -233,8 +233,8 @@ function ksRenderCouplet() {
       '<p class="ks-cp-statement">' + ksEsc(cp.a_text) + '</p>' +
       hintHtml +
       '<div class="ks-btn-row ks-btn-row--yesno">' +
-        '<button class="ks-btn ks-btn-yes' + (selA ? ' sel' : '') + '" onclick="ksAnswer(\'A\')">Yes &mdash; matches</button>' +
-        '<button class="ks-btn ks-btn-no' + (selB ? ' sel' : '') + '" onclick="ksAnswer(\'B\')">No &mdash; doesn\'t</button>' +
+        '<button class="ks-btn ks-btn-yes' + (selA ? ' sel' : '') + '" onclick="ksAnswer(\'A\')">Yes</button>' +
+        '<button class="ks-btn ks-btn-no' + (selB ? ' sel' : '') + '" onclick="ksAnswer(\'B\')">No</button>' +
       '</div>' +
       skipHtml +
     '</div>';
