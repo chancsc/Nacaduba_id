@@ -27,6 +27,14 @@ function ksSkipNext(cp) {
   return cp.next_a || cp.next_b || null;
 }
 
+// "View all observations" link for a species. Uses the stored observations URL
+// (built from the taxon id) or falls back to a name query for taxa without an id.
+function ksInatUrl(sp, name) {
+  if (sp && sp.inat_url) return sp.inat_url;
+  return 'https://www.inaturalist.org/observations?verifiable=true&preferred_place_id=6734&taxon_name='
+    + encodeURIComponent((sp && sp.name) || name || '');
+}
+
 // ── Persistence ──────────────────────────────────────────────────
 function ksSave() {
   try {
@@ -187,8 +195,8 @@ function ksRenderCouplet() {
 
     const sp = name ? ksState.speciesMap.get(name) : null;
     const common = (sp && sp.common_name) ? '<p class="ks-result-common">' + ksEsc(sp.common_name) + '</p>' : '';
-    const inat = (sp && sp.inat_url)
-      ? '<a class="ks-inat-link" href="' + ksEsc(sp.inat_url) + '" target="_blank" rel="noopener noreferrer">View on iNaturalist &#8594;</a>'
+    const inat = name
+      ? '<a class="ks-inat-link" href="' + ksEsc(ksInatUrl(sp, name)) + '" target="_blank" rel="noopener noreferrer">View all observations on iNaturalist &#8594;</a>'
       : '';
 
     el.innerHTML =
@@ -262,7 +270,7 @@ function ksRenderCandidates() {
     const neg = s.score < 0;
     const isTop = s.score === maxScore;
     const medal = isTop && i < 3 ? medals[i] : '';
-    const inatUrl = sp.inat_url || 'https://www.inaturalist.org/search?q=' + encodeURIComponent(s.name);
+    const inatUrl = ksInatUrl(sp, s.name);
     const scoreStr = (s.score > 0 ? '+' : '') + s.score;
     return '<div class="ks-cand">' +
       '<div class="ks-cand-row">' +

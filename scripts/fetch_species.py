@@ -19,6 +19,8 @@ import requests
 
 INAT_BASE = "https://api.inaturalist.org/v1"
 MALAYSIA_PLACE_ID = 7155
+# Place used for the "view all observations" links written into species.json.
+PREFERRED_PLACE_ID = 6734
 OUTPUT = Path(__file__).parent.parent / "data" / "species.json"
 
 session = requests.Session()
@@ -80,7 +82,10 @@ def build_entry(item: dict) -> dict:
         "id": t["id"],
         "name": t["name"],
         "common_name": t.get("preferred_common_name", ""),
-        "inat_url": f"https://www.inaturalist.org/taxa/{t['id']}",
+        "inat_url": (
+            "https://www.inaturalist.org/observations?verifiable=true"
+            f"&taxon_id={t['id']}&preferred_place_id={PREFERRED_PLACE_ID}"
+        ),
         "taxon_photos": extract_photos(t),
         "observation_count": item["count"],
         "wikipedia_url": t.get("wikipedia_url", ""),
