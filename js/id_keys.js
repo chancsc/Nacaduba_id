@@ -335,9 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const resetBtn = document.getElementById('ks-reset');
   if (resetBtn) {
     resetBtn.addEventListener('click', function() {
-      if (ksState.history.length === 0 || confirm('Reset the key and start from the beginning?')) {
-        ksReset();
-      }
+      ksReset();
     });
   }
   ksInit();
