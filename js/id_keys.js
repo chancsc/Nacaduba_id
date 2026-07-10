@@ -1,0 +1,286 @@
+'use strict';
+
+const KS_STORAGE = 'nacaduba-cpkey-v1';
+
+let ksState = {
+  couplets: [],
+  speciesMap: new Map(),
+  history: [],
+  current: null
+};
+
+// ── Utilities ────────────────────────────────────────────────────
+function ksEsc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// ── Persistence ──────────────────────────────────────────────────
+function ksSave() {
+  try {
+    localStorage.setItem(KS_STORAGE, JSON.stringify({
+      history: ksState.history,
+      current: ksState.current
+    }));
+  } catch (e) {}
+}
+
+function ksLoad() {
+  try {
+    const raw = localStorage.getItem(KS_STORAGE);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    ksState.history = Array.isArray(data.history) ? data.history : [];
+    ksState.current = data.current || null;
+  } catch (e) {}
+}
+
+// ── Scoring ──────────────────────────────────────────────────────
+function ksComputeScores() {
+  const scores = new Map();
+  ksState.speciesMap.forEach((_, name) => scores.set(name, 0));
+
+  for (const entry of ksState.history) {
+    if (entry.choice === 'S') continue;
+    const cp = ksState.couplets.find(c => c.id === entry.id);
+    if (!cp) continue;
+    const pos = entry.choice === 'A' ? (cp.species_a || []) : (cp.species_b || []);
+    const neg = entry.choice === 'A' ? (cp.species_b || []) : (cp.species_a || []);
+    pos.forEach(sp => scores.set(sp, (scores.get(sp) || 0) + 1));
+    neg.forEach(sp => scores.set(sp, (scores.get(sp) || 0) - 1));
+  }
+
+  return [...scores.entries()]
+    .map(([name, score]) => ({ name, score }))
+    .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+}
+
+// ── Navigation ───────────────────────────────────────────────────
+function ksAnswer(choice) {
+  const cp = ksState.couplets.find(c => c.id === ksState.current);
+  if (!cp) return;
+
+  ksState.history = ksState.history.filter(h => h.id !== cp.id);
+  if (choice !== 'S') {
+    ksState.history.push({ id: cp.id, choice });
+  }
+
+  const next = choice === 'B' ? cp.next_b : cp.next_a;
+  ksState.current = next || null;
+
+  ksSave();
+  ksRender();
+}
+
+function ksJumpTo(coupletId) {
+  const idx = ksState.history.findIndex(h => h.id === coupletId);
+  if (idx !== -1) {
+    ksState.history = ksState.history.slice(0, idx);
+    ksState.current = coupletId;
+  } else {
+    ksState.history = [];
+    ksState.current = coupletId;
+  }
+  ksSave();
+  ksRender();
+}
+
+function ksBack() {
+  if (ksState.history.length > 0) {
+    const last = ksState.history[ksState.history.length - 1];
+    ksState.history.pop();
+    ksState.current = last.id;
+  } else {
+    ksState.current = ksState.couplets[0]?.id || null;
+  }
+  ksSave();
+  ksRender();
+}
+
+function ksReset() {
+  ksState.history = [];
+  ksState.current = ksState.couplets[0]?.id || null;
+  ksSave();
+  ksRender();
+}
+
+// ── Rendering ────────────────────────────────────────────────────
+function ksRender() {
+  const answered = ksState.history.filter(h => h.choice !== 'S').length;
+  const countEl = document.getElementById('ks-answered-count');
+  if (countEl) countEl.textContent = answered > 0 ? answered + ' answered' : '';
+
+  ksRenderHistory();
+  ksRenderCouplet();
+  ksRenderCandidates();
+}
+
+function ksRenderHistory() {
+  const el = document.getElementById('ks-history');
+  if (!el) return;
+  if (ksState.history.length === 0) { el.innerHTML = ''; return; }
+
+  const items = ksState.history.map(h => {
+    const cp = ksState.couplets.find(c => c.id === h.id);
+    if (!cp) return '';
+    const choiceLbl = h.choice === 'A' ? 'A' : h.choice === 'B' ? 'B' : 'Skip';
+    return '<span class="ks-hist-item" onclick="ksJumpTo(\'' + ksEsc(h.id) + '\')" title="Go back to ' + ksEsc(cp.label) + '">' +
+      ksEsc(cp.label) + ' → ' + choiceLbl + '</span><span class="ks-hist-sep">›</span>';
+  }).join('');
+
+  el.innerHTML = '<div class="ks-hist">' + items + '<span class="ks-hist-current">now</span></div>';
+}
+
+function ksRenderCouplet() {
+  const el = document.getElementById('ks-couplets');
+  if (!el) return;
+
+  if (!ksState.current) {
+    const scores = ksComputeScores();
+    const top = scores[0];
+    const topSp = top ? ksState.speciesMap.get(top.name) : null;
+    const common = (topSp && topSp.common_name) ? ' — ' + ksEsc(topSp.common_name) : '';
+    el.innerHTML =
+      '<div class="ks-result-card">' +
+        '<div class="ks-result-label">Key result</div>' +
+        '<div class="ks-result-species"><em>' + ksEsc(top ? top.name : 'Unknown') + '</em>' + common + '</div>' +
+        '<div class="ks-result-text">End of key branch. The highest-scoring candidate is shown above; the full ranking is in the Candidates panel.</div>' +
+        '<button class="ks-btn ks-btn-skip" onclick="ksBack()" style="margin-top:0.6rem;justify-content:center;">← Go back</button>' +
+      '</div>';
+    return;
+  }
+
+  const cp = ksState.couplets.find(c => c.id === ksState.current);
+  if (!cp) { el.innerHTML = ''; return; }
+
+  const prev = ksState.history.find(h => h.id === cp.id);
+  const selA = prev && prev.choice === 'A';
+  const selB = prev && prev.choice === 'B';
+  const selS = prev && prev.choice === 'S';
+  const answered = selA || selB || selS;
+
+  const hintHtml = cp.hint
+    ? '<details class="ks-hint"><summary>Hint</summary><p>' + ksEsc(cp.hint) + '</p></details>'
+    : '';
+
+  const skipHtml = cp.upperside
+    ? '<button class="ks-btn ks-btn-skip' + (selS ? ' sel' : '') + '" onclick="ksAnswer(\'S\')">Skip — cannot assess upperside / female</button>'
+    : '';
+
+  el.innerHTML =
+    '<div class="ks-cp' + (answered ? ' answered' : '') + '">' +
+      '<div class="ks-cp-label">' +
+        '<span class="ks-label-tag">' + ksEsc(cp.label) + '</span>' +
+        ' ' + ksEsc(cp.question) +
+        (cp.leads ? '<span class="ks-leads"> (leads ' + ksEsc(cp.leads) + ')</span>' : '') +
+      '</div>' +
+      hintHtml +
+      '<div class="ks-btn-row">' +
+        '<button class="ks-btn' + (selA ? ' sel' : '') + '" onclick="ksAnswer(\'A\')">' +
+          '<span class="ks-btn-side">A</span>' +
+          '<span class="ks-btn-text">' + ksEsc(cp.a_text) + '</span>' +
+        '</button>' +
+        '<button class="ks-btn' + (selB ? ' sel' : '') + '" onclick="ksAnswer(\'B\')">' +
+          '<span class="ks-btn-side">B</span>' +
+          '<span class="ks-btn-text">' + ksEsc(cp.b_text) + '</span>' +
+        '</button>' +
+        skipHtml +
+      '</div>' +
+    '</div>';
+}
+
+function ksRenderCandidates() {
+  const el = document.getElementById('ks-candidates');
+  if (!el) return;
+
+  const scored = ksState.history.filter(h => h.choice !== 'S').length;
+  if (scored === 0) {
+    el.innerHTML = '<p class="ks-empty">Answer couplet questions above to rank candidates.</p>';
+    return;
+  }
+
+  const scores = ksComputeScores();
+  const maxScore = Math.max(...scores.map(s => s.score));
+  const minScore = Math.min(...scores.map(s => s.score));
+  const range = Math.max(maxScore - minScore, 1);
+  const medals = ['🥇', '🥈', '🥉'];
+
+  el.innerHTML = scores.slice(0, 10).map(function(s, i) {
+    const sp = ksState.speciesMap.get(s.name) || { name: s.name };
+    const pct = Math.round(((s.score - minScore) / range) * 100);
+    const neg = s.score < 0;
+    const isTop = s.score === maxScore;
+    const medal = isTop && i < 3 ? medals[i] : '';
+    const inatUrl = sp.inat_url || 'https://www.inaturalist.org/search?q=' + encodeURIComponent(s.name);
+    const scoreStr = (s.score > 0 ? '+' : '') + s.score;
+    return '<div class="ks-cand">' +
+      '<div class="ks-cand-row">' +
+        '<span class="ks-rank">' + (medal || (i + 1)) + '</span>' +
+        '<span class="ks-cname">' +
+          '<span class="ks-sci">' + ksEsc(sp.name) + '</span>' +
+          (sp.common_name ? '<span class="ks-common">' + ksEsc(sp.common_name) + '</span>' : '') +
+        '</span>' +
+        '<span class="ks-bar-wrap">' +
+          '<span class="ks-bar-bg"><span class="ks-bar' + (neg ? ' neg' : '') + '" style="width:' + pct + '%"></span></span>' +
+          '<span class="ks-score-num' + (neg ? ' neg' : '') + '">' + ksEsc(scoreStr) + '</span>' +
+        '</span>' +
+        '<a class="ks-inat-icon" href="' + ksEsc(inatUrl) + '" target="_blank" rel="noopener noreferrer" title="View on iNaturalist">🔗</a>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ── Init ─────────────────────────────────────────────────────────
+async function ksInit() {
+  const loadingEl = document.getElementById('loading');
+  const appEl = document.getElementById('ks-app');
+
+  try {
+    const [keyData, spData] = await Promise.all([
+      fetch('data/id_key.json').then(r => { if (!r.ok) throw new Error('id_key'); return r.json(); }),
+      fetch('data/species.json').then(r => { if (!r.ok) throw new Error('species'); return r.json(); })
+    ]);
+
+    ksState.couplets = keyData.couplets || [];
+
+    (spData.species || []).forEach(sp => ksState.speciesMap.set(sp.name, sp));
+
+    // Ensure every species mentioned in couplets has a map entry
+    ksState.couplets.forEach(cp => {
+      [...(cp.species_a || []), ...(cp.species_b || [])].forEach(name => {
+        if (!ksState.speciesMap.has(name)) ksState.speciesMap.set(name, { name });
+      });
+    });
+
+    ksLoad();
+
+    // Validate restored state
+    if (ksState.current && !ksState.couplets.find(c => c.id === ksState.current)) {
+      ksState.current = ksState.couplets[0]?.id || null;
+      ksState.history = [];
+    }
+    if (!ksState.current) {
+      ksState.current = ksState.couplets[0]?.id || null;
+    }
+
+    if (loadingEl) loadingEl.style.display = 'none';
+    if (appEl) appEl.style.display = '';
+
+    ksRender();
+  } catch (err) {
+    if (loadingEl) loadingEl.innerHTML = '<p style="padding:2rem;text-align:center;color:#c00;">Failed to load key data.</p>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const resetBtn = document.getElementById('ks-reset');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+      if (ksState.history.length === 0 || confirm('Reset the key and start from the beginning?')) {
+        ksReset();
+      }
+    });
+  }
+  ksInit();
+});

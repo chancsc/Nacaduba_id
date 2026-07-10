@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Work through the Corbet &amp; Pendlebury dichotomous key one couplet at a time to rank Nacaduba candidates in real time.">
+  <meta name="theme-color" content="#2d5a27">
+  <title>Nacaduba ID — C&amp;P Key Scoring</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .ks-topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: var(--primary); color: #fff;
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.55rem 1rem;
+      margin: -1rem -1rem 0;
+    }
+    .ks-title { font-size: 0.92rem; font-weight: 600; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ks-answered { font-size: 0.75rem; color: rgba(255,255,255,0.7); flex-shrink: 0; }
+    .ks-reset-btn {
+      background: none; border: 1px solid rgba(255,255,255,0.45);
+      color: #fff; border-radius: 5px;
+      padding: 0.22rem 0.55rem; font-size: 0.78rem;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .ks-reset-btn:hover { background: rgba(255,255,255,0.15); }
+    .ks-menu-btn { color: rgba(255,255,255,0.88); flex-shrink: 0; font-size: 1.2rem; line-height: 1; padding: 0.2rem 0.3rem; background: none; border: none; cursor: pointer; }
+    .ks-menu-btn:hover { background: rgba(255,255,255,0.15); }
+
+    .ks-page { max-width: 680px; margin: 0 auto; }
+    .ks-intro { font-size: 0.82rem; color: var(--text-muted); margin: 0.9rem 0 0.75rem; line-height: 1.5; }
+
+    .ks-panel { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 1.25rem; }
+    .ks-section-label { font-size: 0.72rem; font-weight: 700; color: var(--primary); letter-spacing: 0.07em; text-transform: uppercase; margin: 1.25rem 0 0.6rem; }
+    .ks-empty { padding: 1.25rem 0.85rem; font-size: 0.85rem; color: var(--text-muted); }
+
+    .ks-cand { border-bottom: 1px solid #f0ece4; }
+    .ks-cand:last-child { border-bottom: none; }
+    .ks-cand-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.85rem; }
+    .ks-rank { font-size: 0.85rem; width: 1.6rem; flex-shrink: 0; text-align: center; }
+    .ks-cname { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .ks-sci { font-style: italic; font-size: 0.87rem; color: var(--text); }
+    .ks-common { font-size: 0.72rem; color: var(--text-muted); }
+    .ks-bar-wrap { display: flex; align-items: center; gap: 0.35rem; flex-shrink: 0; }
+    .ks-bar-bg { width: 64px; height: 6px; background: #e8e0d0; border-radius: 3px; }
+    .ks-bar { height: 6px; border-radius: 3px; background: var(--primary); transition: width 0.3s ease; }
+    .ks-bar.neg { background: #c0392b; }
+    .ks-score-num { font-size: 0.72rem; color: var(--text-muted); width: 2.4rem; text-align: right; }
+    .ks-score-num.neg { color: #c0392b; }
+    .ks-inat-icon { flex-shrink: 0; font-size: 0.85rem; line-height: 1; text-decoration: none; opacity: 0.5; padding: 0.15rem 0.1rem; border-radius: 3px; transition: opacity 0.15s; }
+    .ks-inat-icon:hover { opacity: 1; }
+
+    .ks-cp {
+      background: var(--card); border-radius: var(--radius);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+      margin-bottom: 0.7rem; overflow: hidden;
+      border-left: 3px solid transparent;
+    }
+    .ks-cp.answered { border-left-color: var(--primary); }
+
+    .ks-cp-label {
+      padding: 0.65rem 0.85rem 0.25rem;
+      font-size: 0.87rem; font-weight: 600; color: var(--text); line-height: 1.4;
+    }
+    .ks-label-tag {
+      display: inline-block;
+      font-size: 0.62rem; font-weight: 700;
+      color: var(--primary); background: var(--border);
+      border-radius: 3px; padding: 0.05em 0.3em;
+      margin-right: 0.25em; vertical-align: 0.05em;
+    }
+    .ks-leads { font-size: 0.72rem; color: var(--text-muted); font-weight: 400; margin-left: 0.3em; }
+
+    .ks-hint { margin: 0 0.85rem 0.3rem; font-size: 0.75rem; }
+    .ks-hint summary { cursor: pointer; color: var(--text-muted); font-style: italic; list-style: none; padding: 0.1rem 0; }
+    .ks-hint summary::-webkit-details-marker { display: none; }
+    .ks-hint summary::before { content: '+ '; }
+    details[open].ks-hint summary::before { content: '− '; }
+    .ks-hint p { color: var(--text-muted); line-height: 1.5; margin-top: 0.3rem; }
+
+    .ks-btn-row { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.15rem 0.85rem 0.75rem; }
+    .ks-btn {
+      display: flex; align-items: flex-start; gap: 0.45rem;
+      border: 1.5px solid var(--border); background: var(--card);
+      border-radius: 7px; padding: 0.4rem 0.6rem;
+      font-size: 0.79rem; cursor: pointer; line-height: 1.45;
+      text-align: left; transition: background 0.15s, border-color 0.15s;
+      width: 100%;
+    }
+    .ks-btn:hover { background: #f0ece4; border-color: var(--primary); }
+    .ks-btn.sel { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .ks-btn-skip {
+      border-style: dashed; color: var(--text-muted); font-style: italic;
+      font-size: 0.75rem; justify-content: center; padding: 0.22rem 0.6rem;
+    }
+    .ks-btn-skip.sel { background: #e8e0d0; border-color: var(--accent); color: var(--accent); border-style: dashed; }
+    .ks-btn-side {
+      flex-shrink: 0; font-weight: 700; font-size: 0.78rem;
+      width: 1.1em; text-align: center; opacity: 0.7; margin-top: 0.05em;
+    }
+    .ks-btn.sel .ks-btn-side { opacity: 0.85; }
+    .ks-btn-text { flex: 1; }
+
+    .ks-hist { display: flex; flex-wrap: wrap; align-items: center; gap: 0.15rem; padding: 0.45rem 0 0.55rem; font-size: 0.75rem; }
+    .ks-hist-item { color: var(--primary); font-weight: 500; cursor: pointer; padding: 0.1rem 0.25rem; border-radius: 3px; white-space: nowrap; }
+    .ks-hist-item:hover { background: rgba(45,90,39,0.1); text-decoration: underline; }
+    .ks-hist-current { color: var(--text-muted); padding: 0.1rem 0.25rem; }
+    .ks-hist-sep { color: var(--text-muted); padding: 0 0.05rem; }
+
+    .ks-result-card {
+      background: var(--card); border-radius: var(--radius);
+      box-shadow: 0 1px 5px rgba(45,90,39,0.18);
+      border-left: 4px solid var(--primary);
+      padding: 0.85rem 1rem; margin-bottom: 0.7rem;
+    }
+    .ks-result-label { font-size: 0.7rem; font-weight: 700; color: var(--primary); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 0.35rem; }
+    .ks-result-species { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .ks-result-text { font-size: 0.79rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.35rem; }
+
+    @media (prefers-color-scheme: dark) {
+      .ks-cand-row:hover { background: rgba(255,255,255,0.04); }
+      .ks-btn:hover { background: rgba(255,255,255,0.06); }
+      .ks-bar-bg { background: rgba(255,255,255,0.12); }
+    }
+    :root[data-theme="dark"] .ks-cand-row:hover { background: rgba(255,255,255,0.04); }
+    :root[data-theme="dark"] .ks-btn:hover { background: rgba(255,255,255,0.06); }
+    :root[data-theme="dark"] .ks-bar-bg { background: rgba(255,255,255,0.12); }
+  </style>
+</head>
+<body>
+
+  <div id="loading" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <span>Loading key data…</span>
+  </div>
+
+  <div id="ks-app" style="display:none;">
+    <div class="ks-topbar">
+      <button class="ks-menu-btn" id="ks-menu-btn" aria-label="Open menu">&#9776;</button>
+      <span class="ks-title">C&amp;P Key Scoring</span>
+      <span class="ks-answered" id="ks-answered-count"></span>
+      <button id="ks-reset" class="ks-reset-btn">Reset</button>
+    </div>
+
+    <div class="ks-page">
+      <p class="ks-intro">
+        Work through the Corbet &amp; Pendlebury dichotomous key one couplet at a time.
+        Select <strong>A</strong> or <strong>B</strong> to advance; couplets that require the
+        <em>upperside</em> offer a <em>Skip</em> option for underside-only photos.
+        Candidates are ranked in real time. Click any breadcrumb step to go back and re-answer.
+      </p>
+
+      <div id="ks-history"></div>
+      <div id="ks-couplets"></div>
+
+      <div class="ks-section-label">Candidates</div>
+      <div class="ks-panel">
+        <div id="ks-candidates">
+          <p class="ks-empty">Answer couplet questions above to rank candidates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <div style="padding:2rem;text-align:center;font-family:sans-serif;">
+      <p>This tool requires JavaScript. Please enable it and reload.</p>
+    </div>
+  </noscript>
+
+  <div id="ks-menu-overlay" class="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="menu-panel">
+      <div class="menu-header">
+        <h2 class="menu-title">Nacaduba ID</h2>
+        <button id="ks-menu-close" class="menu-close" aria-label="Close menu">&#x2715;</button>
+      </div>
+      <nav class="menu-nav" aria-label="Navigation">
+        <a href="index.html" class="menu-nav-item" aria-label="Home — where to start">
+          <span class="menu-nav-item-label">Home</span>
+          <span class="menu-nav-item-desc">Where to start</span>
+        </a>
+        <a href="checklist.html" class="menu-nav-item" aria-label="Feature Scoring — score multiple features at once">
+          <span class="menu-nav-item-label">Feature Scoring</span>
+          <span class="menu-nav-item-desc">Score multiple features at once</span>
+        </a>
+        <a href="key.html" class="menu-nav-item" aria-label="ID Key — step-by-step identification">
+          <span class="menu-nav-item-label">ID Key</span>
+          <span class="menu-nav-item-desc">Step-by-step identification</span>
+        </a>
+        <button class="menu-nav-item active" id="ks-nav-cpkey" aria-label="C&amp;P Key — score couplets from the Corbet &amp; Pendlebury key">
+          <span class="menu-nav-item-label">C&amp;P Key</span>
+          <span class="menu-nav-item-desc">Corbet &amp; Pendlebury couplet scoring</span>
+        </button>
+        <a href="species.html" class="menu-nav-item" aria-label="Species Search — browse all covered taxa">
+          <span class="menu-nav-item-label">Species Search</span>
+          <span class="menu-nav-item-desc">Browse all covered taxa</span>
+        </a>
+        <a href="guide.html" class="menu-nav-item" aria-label="Visual Guide — wing diagrams and terminology">
+          <span class="menu-nav-item-label">Visual Guide</span>
+          <span class="menu-nav-item-desc">Wing diagrams &amp; terminology</span>
+        </a>
+        <a href="about.html" class="menu-nav-item" aria-label="About — how to use this app">
+          <span class="menu-nav-item-label">About</span>
+          <span class="menu-nav-item-desc">How to use this app</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <script src="js/id_keys.js"></script>
+  <script>
+    (function () {
+      var overlay  = document.getElementById('ks-menu-overlay');
+      var openBtn  = document.getElementById('ks-menu-btn');
+      var closeBtn = document.getElementById('ks-menu-close');
+      var cpkeyBtn = document.getElementById('ks-nav-cpkey');
+      function openMenu()  { overlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+      function closeMenu() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+      openBtn.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      overlay.addEventListener('click', function(e) { if (e.target === overlay) closeMenu(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && overlay.classList.contains('open')) closeMenu(); });
+      if (cpkeyBtn) cpkeyBtn.addEventListener('click', closeMenu);
+    })();
+  </script>
+</body>
+</html>
