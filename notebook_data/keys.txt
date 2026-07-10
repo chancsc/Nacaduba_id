@@ -12,4 +12,23 @@ The following is the full text of the diagnostic identification keys for the gen
 8 (9): Underside striae broad, diffuse and yellowish. Fwl 14.5–16.0 mm. ... Nacaduba pactolus
 9: Underside striae narrow and well defined, slightly wider in ♀ than in ♂.
 10 (13): Underside hindwing with inner submarginal and outer postdiscal striae in spaces 4 and 5 nearly touching; striae pale buff in ♂, whitish in ♀.
-11 (12): ♂ upperside violet blue, with a slightly frosted appearance, border a thread. ♀ upperside pale shining blue, with only a very slight purple tinge. Underside hindwing tornal black spot in space 2 crowned by
+11 (12): ♂ upperside violet blue, with a slightly frosted appearance, border a thread. ♀ upperside pale shining blue, with only a very slight purple tinge. Underside hindwing tornal black spot in space 2 crowned by a brownish-orange ring. Fwl 13.0–15.0 mm. ... Nacaduba hermus
+12: ♂ upperside bluish purple, border a thread. ♀ blue areas slightly deeper and more purple than in N. hermus. Underside hindwing tornal black spot in space 2 crowned by a clear orange ring. Fwl 13.0–15.0 mm. ... Nacaduba subperusia lysa
+13: Underside hindwing with inner submarginal and outer postdiscal striae separated by at least half the width of the postdiscal band.
+14 (15): ♂ upperside purplish blue, with the border expanding to at least 1.0 mm at the forewing apex. ♀ upperside paler, less shining blue, with rather narrow borders, Fwl 14.0–16.0 mm. ... Nacaduba pendleburyi
+15: ♂ upperside forewing border a thread throughout.
+16 (17): Underside forewing postdiscal band continuous and almost straight from vein 3 to vein 7. ♂ upperside purple, with a slight bronzy tint. ♀ upperside similar to N. pendleburyi, but blue area darker and more shining. Fwl 15.0–16.0 mm. ... Nacaduba solta
+17: Underside forewing postdiscal band curved in towards base and often slightly dislocated at vein 6.
+18 (19): ♂ upperside dull purple blue, with the veins darker and contrasting; underside striae pale buff. ♀ upperside more purple than in lysa. Fwl 15.0–16.0 mm. ... Nacaduba subperusia intricata
+19: ♂ upperside veins not contrasting; underside striae whitish or white.
+20 (21): ♂ upperside purple, with a steely grey tint. ♀ unknown. Fwl 15.0–16.0 mm. Borneo. ... Nacaduba asaga
+21: ♂ upperside shining violet. ♀ upperside pale shining silvery blue, with a slight greenish tint and broad black borders. Fwl 13.0–14.5 mm. ... Nacaduba sanaya
+22: Underside forewing with a pair of pale subbasal lines across the cell. (berenice group).
+23 (24): Underside with the area between the postdiscal striae unicolorous and of the ground colour. ♂ upperside purple, with the underside markings not visible by transparency. ♀ upperside forewing with a purple-blue patch and with bluish spots on the edge of the dark border in spaces 1b and 2. Fwl 12.0–15.0 mm. ... Nacaduba beroe
+24: Underside with the postdiscal striae inwardly bounded by darker lines and the space between them paler than the ground colour (but character weakly developed in N. kurava ♂).
+25 (26): ♂ upperside violet blue, with underside markings visible by transparency. ♀ upperside pale shining blue turning whitish beyond the forewing cell, border rather narrow. Fwl 13.5–15.0 mm. ... Nacaduba kurava
+26: ♂ upperside with underside markings barely visible by transparency. ♀ upperside not whitish beyond the forewing cell, hindwing mostly brown.
+27 (30): ♂ upperside pale frosted blue due to the presence of many white ribbon scales. Fwl 11.0–13.0 mm.
+28 (29): ♂ upperside pale lavender blue. ♀ upperside forewing with a pale purple blue patch. ... Nacaduba berenice
+29: ♂ upperside slightly more violet, but difficult to separate from N. berenice except by genitalia. ♀ unknown. ... Nacaduba kirtoni
+30: ♂ upperside bluish violet, without ribbon scales. ♀ upperside forewing discal patch darker blue. ... Nacaduba calauria
