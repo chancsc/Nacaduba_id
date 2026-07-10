@@ -70,6 +70,11 @@
       margin-right: 0.25em; vertical-align: 0.05em;
     }
     .ks-leads { font-size: 0.72rem; color: var(--text-muted); font-weight: 400; margin-left: 0.3em; }
+    .ks-cp-question { font-weight: 400; color: var(--text-muted); font-size: 0.8rem; margin-left: 0.15em; }
+    .ks-cp-statement {
+      padding: 0.1rem 0.85rem 0.65rem;
+      font-size: 0.85rem; color: var(--text); line-height: 1.55; margin: 0;
+    }
 
     .ks-hint { margin: 0 0.85rem 0.3rem; font-size: 0.75rem; }
     .ks-hint summary { cursor: pointer; color: var(--text-muted); font-style: italic; list-style: none; padding: 0.1rem 0; }
@@ -89,6 +94,17 @@
     }
     .ks-btn:hover { background: #f0ece4; border-color: var(--primary); }
     .ks-btn.sel { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+    /* Serial-lead Yes / No answer buttons */
+    .ks-btn-row--yesno { flex-direction: row; gap: 0.5rem; }
+    .ks-btn-yes, .ks-btn-no {
+      flex: 1; justify-content: center; text-align: center;
+      font-weight: 600; font-size: 0.83rem; padding: 0.5rem 0.5rem;
+    }
+    .ks-btn-yes:hover { border-color: var(--primary); }
+    .ks-btn-yes.sel { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .ks-btn-no:hover { border-color: #b5651d; }
+    .ks-btn-no.sel { background: #b5651d; border-color: #b5651d; color: #fff; }
     .ks-btn-skip {
       border-style: dashed; color: var(--text-muted); font-style: italic;
       font-size: 0.75rem; justify-content: center; padding: 0.22rem 0.6rem;
@@ -115,7 +131,10 @@
     }
     .ks-result-label { font-size: 0.7rem; font-weight: 700; color: var(--primary); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 0.35rem; }
     .ks-result-species { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .ks-result-common { font-size: 0.8rem; color: var(--text-muted); margin: 0 0 0.1rem; }
     .ks-result-text { font-size: 0.79rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.35rem; }
+    .ks-inat-link { display: inline-block; margin-top: 0.5rem; font-size: 0.78rem; color: var(--primary); text-decoration: none; font-weight: 600; }
+    .ks-inat-link:hover { text-decoration: underline; }
 
     @media (prefers-color-scheme: dark) {
       .ks-cand-row:hover { background: rgba(255,255,255,0.04); }
@@ -144,9 +163,10 @@
 
     <div class="ks-page">
       <p class="ks-intro">
-        Work through the Corbet &amp; Pendlebury dichotomous key one couplet at a time.
-        Select <strong>A</strong> or <strong>B</strong> to advance; couplets that require the
-        <em>upperside</em> offer a <em>Skip</em> option for underside-only photos.
+        Work through the Corbet &amp; Pendlebury dichotomous key one lead at a time.
+        Each lead shows a single statement — answer <strong>Yes</strong> if it matches your
+        specimen (advance) or <strong>No</strong> if it doesn't (jump to the contrasting lead).
+        Couplets that need the <em>upperside</em> offer a <em>Skip</em> for underside-only photos.
         Candidates are ranked in real time. Click any breadcrumb step to go back and re-answer.
       </p>
 

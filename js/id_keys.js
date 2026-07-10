@@ -16,6 +16,17 @@ function ksEsc(s) {
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// The real Corbet & Pendlebury lead number for a couplet (first int in `leads`).
+function ksNumA(cp) {
+  const m = String(cp && cp.leads || '').match(/\d+/);
+  return m ? m[0] : String((cp && cp.label || '').replace(/^K/, ''));
+}
+
+// Where a Skip advances to: the first non-terminal branch, or null if both end.
+function ksSkipNext(cp) {
+  return cp.next_a || cp.next_b || null;
+}
+
 // ── Persistence ──────────────────────────────────────────────────
 function ksSave() {
   try {
@@ -37,6 +48,7 @@ function ksLoad() {
 }
 
 // ── Scoring ──────────────────────────────────────────────────────
+// Yes (choice A) = the lead statement matched; No (choice B) = it didn't.
 function ksComputeScores() {
   const scores = new Map();
   ksState.speciesMap.forEach((_, name) => scores.set(name, 0));
@@ -57,6 +69,7 @@ function ksComputeScores() {
 }
 
 // ── Navigation ───────────────────────────────────────────────────
+// choice: 'A' = Yes (statement matches), 'B' = No, 'S' = Skip upperside.
 function ksAnswer(choice) {
   const cp = ksState.couplets.find(c => c.id === ksState.current);
   if (!cp) return;
@@ -66,7 +79,10 @@ function ksAnswer(choice) {
     ksState.history.push({ id: cp.id, choice });
   }
 
-  const next = choice === 'B' ? cp.next_b : cp.next_a;
+  let next;
+  if (choice === 'S')      next = ksSkipNext(cp);
+  else if (choice === 'B') next = cp.next_b;
+  else                     next = cp.next_a;
   ksState.current = next || null;
 
   ksSave();
@@ -124,29 +140,66 @@ function ksRenderHistory() {
   const items = ksState.history.map(h => {
     const cp = ksState.couplets.find(c => c.id === h.id);
     if (!cp) return '';
-    const choiceLbl = h.choice === 'A' ? 'A' : h.choice === 'B' ? 'B' : 'Skip';
-    return '<span class="ks-hist-item" onclick="ksJumpTo(\'' + ksEsc(h.id) + '\')" title="Go back to ' + ksEsc(cp.label) + '">' +
-      ksEsc(cp.label) + ' → ' + choiceLbl + '</span><span class="ks-hist-sep">›</span>';
-  }).join('');
+    const verdict = h.choice === 'S' ? 'Skip' : h.choice === 'A' ? 'Yes' : 'No';
+    const label = 'Key ' + ksNumA(cp) + ': ' + verdict;
+    return '<span class="ks-hist-item" onclick="ksJumpTo(\'' + ksEsc(h.id) + '\')" ' +
+      'title="Back to Key ' + ksEsc(ksNumA(cp)) + '">' + ksEsc(label) + '</span>';
+  }).filter(Boolean).join('<span class="ks-hist-sep">&#8250;</span>');
 
-  el.innerHTML = '<div class="ks-hist">' + items + '<span class="ks-hist-current">now</span></div>';
+  el.innerHTML = '<div class="ks-hist">' + items +
+    '<span class="ks-hist-sep">&#8250;</span><span class="ks-hist-current">now</span></div>';
 }
 
 function ksRenderCouplet() {
   const el = document.getElementById('ks-couplets');
   if (!el) return;
 
+  // Reached a terminal lead — show the identification result.
   if (!ksState.current) {
+    const last = ksState.history[ksState.history.length - 1];
+    const cp = last ? ksState.couplets.find(c => c.id === last.id) : null;
+
+    let side = [], text, leadNum;
+    if (cp && last.choice === 'B') {
+      side = cp.species_b || [];
+      text = cp.b_text;
+      leadNum = String(cp.leads || '').split('/')[1];
+    } else if (cp) {
+      side = cp.species_a || [];
+      text = cp.a_text;
+      leadNum = ksNumA(cp);
+    }
+    if (leadNum) leadNum = leadNum.replace(/[^\d]/g, '');
+
+    let name = side[0];
+    // Fall back to the top-scoring candidate if the branch has no single species.
     const scores = ksComputeScores();
-    const top = scores[0];
-    const topSp = top ? ksState.speciesMap.get(top.name) : null;
-    const common = (topSp && topSp.common_name) ? ' — ' + ksEsc(topSp.common_name) : '';
+    if (!name && scores[0]) name = scores[0].name;
+
+    // A terminal lead can end on look-alikes the key cannot separate (e.g.
+    // russelli / normani). Name them so the result isn't falsely precise.
+    const others = side.slice(1);
+    const ambiguous = others.length
+      ? '<p class="ks-result-text"><strong>Not separable by this key from:</strong> ' +
+          ksEsc(others.map(n => n.replace(/^Nacaduba /, 'N. ')).join(', ')) +
+          ' — compare the candidates below.</p>'
+      : '';
+
+    const sp = name ? ksState.speciesMap.get(name) : null;
+    const common = (sp && sp.common_name) ? '<p class="ks-result-common">' + ksEsc(sp.common_name) + '</p>' : '';
+    const inat = (sp && sp.inat_url)
+      ? '<a class="ks-inat-link" href="' + ksEsc(sp.inat_url) + '" target="_blank" rel="noopener noreferrer">View on iNaturalist &#8594;</a>'
+      : '';
+
     el.innerHTML =
       '<div class="ks-result-card">' +
-        '<div class="ks-result-label">Key result</div>' +
-        '<div class="ks-result-species"><em>' + ksEsc(top ? top.name : 'Unknown') + '</em>' + common + '</div>' +
-        '<div class="ks-result-text">End of key branch. The highest-scoring candidate is shown above; the full ranking is in the Candidates panel.</div>' +
-        '<button class="ks-btn ks-btn-skip" onclick="ksBack()" style="margin-top:0.6rem;justify-content:center;">← Go back</button>' +
+        '<p class="ks-result-label">&#9658; Identification' + (leadNum ? ' &middot; Key ' + ksEsc(leadNum) : '') + '</p>' +
+        '<p class="ks-result-species"><em>' + ksEsc(name || 'Unknown') + '</em></p>' +
+        common +
+        (text ? '<p class="ks-result-text">' + ksEsc(text) + '</p>' : '') +
+        ambiguous +
+        inat +
+        '<button class="ks-btn ks-btn-skip" onclick="ksBack()" style="margin-top:0.7rem;">&#8592; Go back</button>' +
       '</div>';
     return;
   }
@@ -157,36 +210,33 @@ function ksRenderCouplet() {
   const prev = ksState.history.find(h => h.id === cp.id);
   const selA = prev && prev.choice === 'A';
   const selB = prev && prev.choice === 'B';
-  const selS = prev && prev.choice === 'S';
-  const answered = selA || selB || selS;
 
   const hintHtml = cp.hint
     ? '<details class="ks-hint"><summary>Hint</summary><p>' + ksEsc(cp.hint) + '</p></details>'
     : '';
 
-  const skipHtml = cp.upperside
-    ? '<button class="ks-btn ks-btn-skip' + (selS ? ' sel' : '') + '" onclick="ksAnswer(\'S\')">Skip — cannot assess upperside / female</button>'
+  // Skip is only meaningful when the upperside can't be assessed AND at least
+  // one branch continues the key (both-terminal couplets get no Skip).
+  const canSkip = cp.upperside && ksSkipNext(cp) !== null;
+  const skipHtml = canSkip
+    ? '<div class="ks-btn-row"><button class="ks-btn ks-btn-skip" onclick="ksAnswer(\'S\')">' +
+        'Skip — cannot assess upperside / female</button></div>'
+    : '';
+
+  const questionHtml = cp.question
+    ? ' <span class="ks-cp-question">' + ksEsc(cp.question) + '</span>'
     : '';
 
   el.innerHTML =
-    '<div class="ks-cp' + (answered ? ' answered' : '') + '">' +
-      '<div class="ks-cp-label">' +
-        '<span class="ks-label-tag">' + ksEsc(cp.label) + '</span>' +
-        ' ' + ksEsc(cp.question) +
-        (cp.leads ? '<span class="ks-leads"> (leads ' + ksEsc(cp.leads) + ')</span>' : '') +
-      '</div>' +
+    '<div class="ks-cp">' +
+      '<p class="ks-cp-label"><span class="ks-label-tag">Key ' + ksEsc(ksNumA(cp)) + '</span>' + questionHtml + '</p>' +
+      '<p class="ks-cp-statement">' + ksEsc(cp.a_text) + '</p>' +
       hintHtml +
-      '<div class="ks-btn-row">' +
-        '<button class="ks-btn' + (selA ? ' sel' : '') + '" onclick="ksAnswer(\'A\')">' +
-          '<span class="ks-btn-side">A</span>' +
-          '<span class="ks-btn-text">' + ksEsc(cp.a_text) + '</span>' +
-        '</button>' +
-        '<button class="ks-btn' + (selB ? ' sel' : '') + '" onclick="ksAnswer(\'B\')">' +
-          '<span class="ks-btn-side">B</span>' +
-          '<span class="ks-btn-text">' + ksEsc(cp.b_text) + '</span>' +
-        '</button>' +
-        skipHtml +
+      '<div class="ks-btn-row ks-btn-row--yesno">' +
+        '<button class="ks-btn ks-btn-yes' + (selA ? ' sel' : '') + '" onclick="ksAnswer(\'A\')">Yes &mdash; matches</button>' +
+        '<button class="ks-btn ks-btn-no' + (selB ? ' sel' : '') + '" onclick="ksAnswer(\'B\')">No &mdash; doesn\'t</button>' +
       '</div>' +
+      skipHtml +
     '</div>';
 }
 
@@ -260,7 +310,7 @@ async function ksInit() {
       ksState.current = ksState.couplets[0]?.id || null;
       ksState.history = [];
     }
-    if (!ksState.current) {
+    if (!ksState.current && ksState.history.length === 0) {
       ksState.current = ksState.couplets[0]?.id || null;
     }
 
