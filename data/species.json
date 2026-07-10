@@ -121,6 +121,24 @@
       "wikipedia_url": null
     },
     {
+      "id": null,
+      "name": "Nacaduba asaga",
+      "common_name": "Bornean Four-line Blue",
+      "inat_url": null,
+      "taxon_photos": [],
+      "observation_count": 0,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_asaga"
+    },
+    {
+      "id": null,
+      "name": "Nacaduba kirtoni",
+      "common_name": "Highland Six-line Blue",
+      "inat_url": null,
+      "taxon_photos": [],
+      "observation_count": 0,
+      "wikipedia_url": "http://en.wikipedia.org/wiki/Nacaduba_kirtoni"
+    },
+    {
       "id": 1569161,
       "name": "Nacaduba solta",
       "common_name": "",
