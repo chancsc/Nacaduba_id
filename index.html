@@ -190,6 +190,14 @@
       margin: 0 0 0.35rem;
     }
     .landing-intro-feature-desc:last-child { margin-bottom: 0; }
+    .landing-intro-feature-desc a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 2px;
+    }
+    .landing-intro-feature-desc a:hover { text-decoration-color: var(--primary); }
 
     /* ── Quick links ── */
     .landing-links {
@@ -291,18 +299,23 @@
           <p class="landing-intro-feature-name">Species Search</p>
           <p class="landing-intro-feature-desc">
             Browse or search the full list of taxa covered by this key. Each species page shows its
-            identification characters, reference photos, and the route the key takes to reach it —
-            displayed as two paths:
+            identification characters, reference photos, and the routes that arrive at this species —
+            displayed as up to three paths:
           </p>
           <p class="landing-intro-feature-desc">
-            <strong>Direct path</strong> — the exact sequence of questions and answers the ID key
-            follows, step by step, to arrive at this species.
+            <strong>Direct path</strong> — the exact sequence of questions and answers the Feature
+            Scoring key follows, step by step, to arrive at this species.
           </p>
           <p class="landing-intro-feature-desc">
             <strong>Simulation CD path</strong> — an alternative route showing how the key still
             reaches the same species when the hardest-to-see characters (such as upperside features
             and forewing underside spaces 1–3, often hidden in resting photos) are all answered
             “Cannot determine”.
+          </p>
+          <p class="landing-intro-feature-desc">
+            <strong>C&amp;P key path</strong> — the lead-by-lead route through the Corbet &amp;
+            Pendlebury key, shown in the same Yes / No form as the <a href="cpkey.html">C&amp;P Key</a>
+            tool, so you can see exactly how that key reaches this species.
           </p>
         </div>
 
